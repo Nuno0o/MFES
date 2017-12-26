@@ -1,6 +1,6 @@
-class Fruit
+class Batch
 types
-	public Type = <Maça> | <Pera>;--acrescentar mais aqui...
+	public Type = <Maça> | <Pera>;--Lista de tipos de fruta
 	public Quantity = rat;
 values
 -- TODO Define values here
@@ -12,4 +12,4 @@ functions
 -- TODO Define functiones here
 traces
 -- TODO Define Combinatorial Test Traces here
-end Fruit
+end Batch
