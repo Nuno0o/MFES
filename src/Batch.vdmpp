@@ -5,10 +5,21 @@ values
 -- TODO Define values here
 instance variables
 	private type : Fruit`Type;
-	private weight : rat;
+	private weight : real;
+	inv weight >= 0;
+	
 operations
-	public Batch: Fruit`Type * rat ==> Batch
-	Batch(Type,Weight) == (type := Type; weight := Weight;return self)
+	public Batch: Fruit`Type ==> Batch
+	Batch(Type) == (type := Type; weight := 0;return self);
+	
+	public addWeight: real ==> ()
+	addWeight(Weight) == (weight := weight + Weight)
+	pre Weight > 0;
+	
+	public removeWeight: real ==> ()
+	removeWeight(Weight) == (weight := weight - Weight)
+	pre Weight <= weight;
+	
 functions
 -- TODO Define functiones here
 traces
