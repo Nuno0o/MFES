@@ -1,16 +1,15 @@
-class Batch
+class BatchGroup
 types
 -- TODO Define types here
 values
 -- TODO Define values here
 instance variables
-	private type : Fruit`Type;
-	private weight : rat;
+	private batches : seq of Batch;
 operations
-	public Batch: Fruit`Type * rat ==> Batch
-	Batch(Type,Weight) == (type := Type; weight := Weight;return self)
+	public BatchGroup: () ==> BatchGroup
+	BatchGroup() == (batches := [];return self)
 functions
 -- TODO Define functiones here
 traces
 -- TODO Define Combinatorial Test Traces here
-end Batch
+end BatchGroup
