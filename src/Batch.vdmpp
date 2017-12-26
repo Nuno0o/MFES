@@ -4,12 +4,12 @@ types
 values
 -- TODO Define values here
 instance variables
-	private type : Fruit`Type;
+	private type : Product`Type;
 	private weight : real;
 	inv weight >= 0;
 	
 operations
-	public Batch: Fruit`Type ==> Batch
+	public Batch: Product`Type ==> Batch
 	Batch(Type) == (type := Type; weight := 0;return self);
 	
 	public addWeight: real ==> ()

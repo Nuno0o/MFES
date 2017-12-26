@@ -1,4 +1,4 @@
-class Fruit
+class Product
 types
 	public static Type = <Maça> | <Pera>;--Lista de tipos de fruta
 values
@@ -11,4 +11,4 @@ functions
 -- TODO Define functiones here
 traces
 -- TODO Define Combinatorial Test Traces here
-end Fruit
+end Product
