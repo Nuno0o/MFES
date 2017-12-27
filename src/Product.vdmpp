@@ -1,6 +1,6 @@
 class Product
 types
-	public static Type = <Maça> | <Pera>;--Lista de tipos de fruta
+	public static Type = <Maça> | <Pera> | <Manga> | <Batata> | <Banana>;--Lista de tipos de produtos
 values
 -- TODO Define values here
 instance variables

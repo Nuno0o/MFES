@@ -4,9 +4,64 @@ types
 values
 -- TODO Define values here
 instance variables
--- TODO Define instance variables here
+	private productions : map Product`Type to real;
+	private delegations : map Product`Type to set of Delegation;
+	private batches : map Delegation to seq of Batch;
+	inv (dom productions) = (dom delegations);
 operations
--- TODO Define operations here
+	public Producer: () ==> Producer
+	Producer() == (productions := { |-> } ; delegations := { |-> };batches := { |-> } ; return self);
+	
+	public addProduct: Product`Type ==> ()
+	addProduct(P) == (productions := productions munion {P |-> 0}; delegations := delegations munion {P |-> {}})
+	pre P not in set(dom productions) and P not in set(dom delegations);
+	
+	public removeProduct: Product`Type ==> ()
+	removeProduct(P) == (productions := {P} <-: productions; delegations := {P} <-: delegations)
+	pre P in set(dom productions) and P in set(dom delegations)
+	post P not in set(dom productions) and P not in set(dom delegations);
+	
+	public addProductStock: Product`Type * real ==> ()
+	addProductStock(P,S) == (productions := productions ++ {P |-> productions(P) + S})
+	pre P in set(dom productions) and S >= 0;
+	
+	public removeProductStock: Product`Type * real ==> ()
+	removeProductStock(P,S) == (productions := productions ++ {P |-> productions(P) - S})
+	pre P in set(dom productions) and S >= 0 and S <= productions(P);
+	
+	public addDelegation: Delegation ==> ()
+	addDelegation(D) == (batches := batches munion {D |-> {}})
+	pre D not in set (dom batches);
+	
+	public removeDelegation: Delegation ==> ()
+	removeDelegation(D) == (
+		batches := {D} <-: batches;
+		for all product in set (dom delegations) do (
+			delegations := delegations ++ {product |-> (delegations(product) \ {D})}
+		)
+	)
+	pre D in set  (dom batches);
+	
+	
+	public generateBatches: () ==> ()
+	generateBatches() == (
+		dcl n : nat;--number of delegations
+		dcl batch :Batch;
+		for all product in set (dom productions) do(
+			if(productions(product) > 0) then(
+				n := card delegations(product);
+				for all delegation in set (delegations(product)) do(
+					batch := new Batch(product);
+					batch.addWeight(productions(product) / n);
+					batches := batches munion { delegation |-> (batches(delegation)^[batch])};
+				)
+			)
+		)
+	)
+	pre dom batches = {};
+	
+	public clearBatches: () ==> ()
+	clearBatches() == (batches := { |-> });
 functions
 -- TODO Define functiones here
 traces

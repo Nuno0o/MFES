@@ -2,11 +2,11 @@ class Batch
 types
 -- TODO Define types here
 values
-	public maxWeight = 5.0;
+-- TODO Define values here
 instance variables
 	private type : Product`Type;
 	private weight : real;
-	inv weight >= 0 and weight <= maxWeight;
+	inv weight >= 0;
 	
 operations
 	public Batch: Product`Type ==> Batch
