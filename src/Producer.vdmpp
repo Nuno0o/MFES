@@ -11,28 +11,32 @@ instance variables
 operations
 	public Producer: () ==> Producer
 	Producer() == (productions := { |-> } ; delegations := { |-> };batches := { |-> } ; return self);
-	
+	--Add a product
 	public addProduct: Product`Type ==> ()
 	addProduct(P) == (productions := productions munion {P |-> 0}; delegations := delegations munion {P |-> {}})
-	pre P not in set(dom productions) and P not in set(dom delegations);
-	
+	pre P not in set(dom productions) and P not in set(dom delegations)
+	post P in set(dom productions) and P in set(dom delegations);
+	--Remove a product
 	public removeProduct: Product`Type ==> ()
 	removeProduct(P) == (productions := {P} <-: productions; delegations := {P} <-: delegations)
 	pre P in set(dom productions) and P in set(dom delegations)
 	post P not in set(dom productions) and P not in set(dom delegations);
-	
+	--Add stock to a product
 	public addProductStock: Product`Type * real ==> ()
 	addProductStock(P,S) == (productions := productions ++ {P |-> productions(P) + S})
-	pre P in set(dom productions) and S >= 0;
-	
+	pre P in set(dom productions) and S >= 0
+	post productions(P) >= S;
+	--Remove stock from a product
 	public removeProductStock: Product`Type * real ==> ()
 	removeProductStock(P,S) == (productions := productions ++ {P |-> productions(P) - S})
-	pre P in set(dom productions) and S >= 0 and S <= productions(P);
-	
+	pre P in set(dom productions) and S >= 0 and S <= productions(P)
+	post productions(P) >= 0;
+	--Add a new delegation
 	public addDelegation: Delegation ==> ()
 	addDelegation(D) == (batches := batches munion {D |-> {}})
-	pre D not in set (dom batches);
-	
+	pre D not in set (dom batches)
+	post D in set(dom batches);
+	--Remove a delegation
 	public removeDelegation: Delegation ==> ()
 	removeDelegation(D) == (
 		batches := {D} <-: batches;
@@ -40,9 +44,24 @@ operations
 			delegations := delegations ++ {product |-> (delegations(product) \ {D})}
 		)
 	)
-	pre D in set  (dom batches);
+	pre D in set  (dom batches)
+	post D not in set(dom batches) and D not in set(dunion rng delegations);
+	--Add new product that a delegation wants
+	public addProductDelegation: Product`Type * Delegation ==> ()
+	addProductDelegation(P,D) == (
+		delegations := delegations ++ {P |-> (delegations(P) union {D})}
+	)
+	pre P in set (dom productions)and D in set dom batches and D not in set delegations(P)
+	post D in set delegations(P);
+	--Remove a product that a delegation no longer wants
+	public removeProductDelegation: Product`Type * Delegation ==> ()
+	removeProductDelegation(P,D) == (
+		delegations := delegations ++ {P |-> (delegations(P) \ {D})}
+	)
+	pre P in set (dom productions)and D in set dom batches and D in set delegations(P)
+	post D not in set delegations(P);
 	
-	
+	--Generate batches to be sent to delegations
 	public generateBatches: () ==> ()
 	generateBatches() == (
 		dcl n : nat;--number of delegations
@@ -54,9 +73,10 @@ operations
 					batch := new Batch(product);
 					batch.addWeight(productions(product) / n);
 					batches := batches munion { delegation |-> (batches(delegation)^[batch])};
-				)
-			)
-		)
+				);
+				productions := productions ++ {product |-> 0};
+			);
+		);
 	)
 	pre dom batches = {};
 	
