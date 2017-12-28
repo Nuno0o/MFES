@@ -4,9 +4,22 @@ types
 values
 -- TODO Define values here
 instance variables
--- TODO Define instance variables here
+	private name : seq of char;--Name of the consumer
+	private interests : set of Product`Type;--Interests of the consumer
+	private baskets : seq of Basket;--Baskets the consumer has retrieved
 operations
--- TODO Define operations here
+	public Consumer: seq of char * set of Product`Type ==> Consumer
+	Consumer(N,I) == (name := N; interests := I;baskets := []; return self);
+	
+	public getInterests: () ==> set of Product`Type
+	getInterests() == (return interests);
+	
+	public getBaskets: () ==> seq of Basket
+	getBaskets() == (return baskets);
+	
+	public addBasket: Basket ==> ()
+	addBasket(B) == (baskets := [B]^baskets)
+	post hd baskets = B;
 functions
 -- TODO Define functiones here
 traces
