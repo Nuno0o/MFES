@@ -1,17 +1,17 @@
 class Consumer
 types
--- TODO Define types here
+	public static Size = <Pequena> | <Grande>
 values
 -- TODO Define values here
 instance variables
 	private name : seq of char;--Name of the consumer
-	private basketsize : Basket`Size;--Interests of the consumer
+	private basketsize : Size;--Size of the baskets the consumer should receive
 	private baskets : seq of Basket;--Baskets the consumer has retrieved
 operations
-	public Consumer: seq of char * Basket`Size ==> Consumer
+	public Consumer: seq of char * Size ==> Consumer
 	Consumer(N,S) == (name := N; basketsize := S;baskets := []; return self);
 	
-	public getBasketSize: () ==> Basket`Size
+	public getBasketSize: () ==> Size
 	getBasketSize() == (return basketsize);
 	
 	public getBaskets: () ==> seq of Basket

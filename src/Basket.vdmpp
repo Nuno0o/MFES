@@ -1,6 +1,5 @@
 class Basket
 types
-	public static Size = <Pequena> | <Grande>
 values
 	public maxWeight : real = 8;
 instance variables
