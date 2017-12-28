@@ -5,14 +5,14 @@ values
 -- TODO Define values here
 instance variables
 	private name : seq of char;--Name of the consumer
-	private interests : set of Product`Type;--Interests of the consumer
+	private basketsize : Basket`Size;--Interests of the consumer
 	private baskets : seq of Basket;--Baskets the consumer has retrieved
 operations
-	public Consumer: seq of char * set of Product`Type ==> Consumer
-	Consumer(N,I) == (name := N; interests := I;baskets := []; return self);
+	public Consumer: seq of char * Basket`Size ==> Consumer
+	Consumer(N,S) == (name := N; basketsize := S;baskets := []; return self);
 	
-	public getInterests: () ==> set of Product`Type
-	getInterests() == (return interests);
+	public getBasketSize: () ==> Basket`Size
+	getBasketSize() == (return basketsize);
 	
 	public getBaskets: () ==> seq of Basket
 	getBaskets() == (return baskets);
