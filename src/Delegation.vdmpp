@@ -6,6 +6,7 @@ values
 instance variables
 	private name: seq of char;
 	private stock : map Product`Type to real;
+	private baskets : map Basket to Consumer;
 operations
 	public Delegation: seq of char ==> Delegation
 	Delegation(N) == (name := N;return self);
