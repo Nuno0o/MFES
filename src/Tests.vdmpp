@@ -1,0 +1,22 @@
+class Tests
+types
+-- TODO Define types here
+values
+-- TODO Define values here
+instance variables
+-- TODO Define instance variables here
+operations
+	protected static assertTrue: bool ==> ()
+	assertTrue(arg) == (IO`print("Success\n"); return;)
+	pre arg;
+	
+	public static testAll: () ==> ()
+	testAll() == (
+		IO`print("\n");
+		TestsProducer`testProducerOps();
+	);
+functions
+-- TODO Define functiones here
+traces
+-- TODO Define Combinatorial Test Traces here
+end Tests

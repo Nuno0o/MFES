@@ -1,0 +1,41 @@
+class TestsProducer is subclass of Tests
+types
+-- TODO Define types here
+values
+-- TODO Define values here
+instance variables
+-- TODO Define instance variables here
+operations
+	public static testProducerOps : () ==> ()
+	testProducerOps() == (
+		dcl p : Producer := new Producer("P1");
+		dcl d1 : Delegation;
+		dcl d2 : Delegation;
+		assertTrue(p.getName() = "P1");
+		p.addProduct(<Banana>);
+		p.addProduct(<Manga>);
+		assertTrue(p.getProducts() = {<Manga>,<Banana>});
+		p.removeProduct(<Banana>);
+		assertTrue(p.getProducts() = {<Manga>});
+		assertTrue(p.getStock(<Manga>) = 0);
+		p.addProductStock(<Manga>,10);
+		assertTrue(p.getStock(<Manga>) = 10);
+		p.removeProductStock(<Manga>,5);
+		assertTrue(p.getStock(<Manga>) = 5);
+		d1 := new Delegation("D1");
+		d2 := new Delegation("D2");
+		p.addDelegation(d1);
+		p.addDelegation(d2);
+		assertTrue(p.getDelegations() = {d1,d2});
+		p.addProductDelegation(<Manga>,d1);
+		assertTrue(p.getProductsDelegation(<Manga>) = {d1});
+		p.removeProductDelegation(<Manga>,d1);
+		assertTrue(p.getProductsDelegation(<Manga>) = {});
+		p.removeDelegation(d2);
+		assertTrue(p.getDelegations() = {d1});
+	);
+functions
+-- TODO Define functiones here
+traces
+-- TODO Define Combinatorial Test Traces here
+end TestsProducer
