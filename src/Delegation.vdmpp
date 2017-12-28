@@ -6,10 +6,23 @@ values
 instance variables
 	private name: seq of char;
 	private stock : map Product`Type to real;
+	private customers : set of Consumer;
 	private baskets : map Basket to Consumer;
+	inv rng baskets subset customers;
 operations
 	public Delegation: seq of char ==> Delegation
-	Delegation(N) == (name := N;return self);
+	Delegation(N) == (name := N;stock := { |-> };customers := {};baskets := { |-> };return self);
+	--Get product list
+	public getProducts: () ==> set of Product`Type
+	getProducts() == (return dom stock);
+	--Give baskets to consumers
+	public giveBaskets: () ==> ()
+	giveBaskets() == (
+		for all basket in set (dom baskets) do(
+			baskets(basket).addBasket(basket);
+		);
+		baskets := { |-> };
+	)
 functions
 -- TODO Define functiones here
 traces

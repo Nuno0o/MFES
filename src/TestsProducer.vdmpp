@@ -27,10 +27,6 @@ operations
 		p.addDelegation(d1);
 		p.addDelegation(d2);
 		assertTrue(p.getDelegations() = {d1,d2});
-		p.addProductDelegation(<Manga>,d1);
-		assertTrue(p.getProductsDelegation(<Manga>) = {d1});
-		p.removeProductDelegation(<Manga>,d1);
-		assertTrue(p.getProductsDelegation(<Manga>) = {});
 		p.removeDelegation(d2);
 		assertTrue(p.getDelegations() = {d1});
 	);

@@ -7,84 +7,71 @@ instance variables
 	private name : seq of char;
 	private stocks : map Product`Type to real;
 	private delegations : set of Delegation;
-	private productsToSell : map Product`Type to set of Delegation;
-	inv dunion rng productsToSell subset delegations;
 operations
 	public Producer: seq of char ==> Producer
-	Producer(Name) == (name := Name;stocks := { |-> } ; productsToSell := { |-> };delegations := {} ; return self);
+	Producer(Name) == (name := Name;stocks := { |-> };delegations := {} ; return self);
 	--Get name
 	public getName:() ==> seq of char
 	getName() == (return name);
+	
 	--Add a product
 	public addProduct: Product`Type ==> ()
-	addProduct(P) == (stocks := stocks munion {P |-> 0}; productsToSell := productsToSell munion {P |-> {}})
-	pre P not in set(dom stocks) and P not in set(dom productsToSell)
-	post P in set(dom stocks) and P in set(dom productsToSell);
+	addProduct(P) == (stocks := stocks munion {P |-> 0};)
+	pre P not in set(dom stocks)
+	post P in set(dom stocks);
+	
 	--Remove a product
 	public removeProduct: Product`Type ==> ()
-	removeProduct(P) == (stocks := {P} <-: stocks; productsToSell := {P} <-: productsToSell)
-	pre P in set(dom stocks) and P in set(dom productsToSell)
-	post P not in set(dom stocks) and P not in set(dom productsToSell);
+	removeProduct(P) == (stocks := {P} <-: stocks)
+	pre P in set(dom stocks) 
+	post P not in set(dom stocks);
+	
 	--Get products
 	public getProducts: () ==> set of Product`Type
 	getProducts() == (return dom stocks);
+	
 	--Add productsToSell to a product
 	public addProductStock: Product`Type * real ==> ()
 	addProductStock(P,S) == (stocks := stocks ++ {P |-> stocks(P) + S})
 	pre P in set(dom stocks) and S >= 0
 	post stocks(P) >= S;
+	
 	--Remove productsToSell from a product
 	public removeProductStock: Product`Type * real ==> ()
 	removeProductStock(P,S) == (stocks := stocks ++ {P |-> stocks(P) - S})
 	pre P in set(dom stocks) and S >= 0 and S <= stocks(P)
 	post stocks(P) >= 0;
+	
 	--Get productsToSell of a product
 	public getStock: Product`Type ==> real
 	getStock(P) == (return stocks(P))
 	pre P in set(dom stocks);
+	
 	--Add a new delegation
 	public addDelegation: Delegation ==> ()
 	addDelegation(D) == (delegations := delegations union {D})
 	pre D not in set delegations
 	post D in set delegations;
+	
 	--Remove a delegation
 	public removeDelegation: Delegation ==> ()
 	removeDelegation(D) == (
-		for all product in set (dom productsToSell) do (
-			productsToSell := productsToSell ++ {product |-> (productsToSell(product) \ {D})}
-		);
 		delegations := delegations \ {D};
 	)
 	pre D in set delegations
-	post D not in set delegations and D not in set(dunion rng productsToSell);
-	--Get list of productsToSell
+	post D not in set delegations;
+	
+	--Get list of delegations
 	public getDelegations: () ==> set of Delegation
 	getDelegations() == (return delegations);
-	--Add new product that a delegation wants
-	public addProductDelegation: Product`Type * Delegation ==> ()
-	addProductDelegation(P,D) == (
-		productsToSell := productsToSell ++ {P |-> (productsToSell(P) union {D})}
-	)
-	pre P in set (dom stocks)and D in set delegations and D not in set productsToSell(P)
-	post D in set productsToSell(P);
-	--Remove a product that a delegation no longer wants
-	public removeProductDelegation: Product`Type * Delegation ==> ()
-	removeProductDelegation(P,D) == (
-		productsToSell := productsToSell ++ {P |-> (productsToSell(P) \ {D})}
-	)
-	pre P in set (dom stocks)and D in set delegations and D in set productsToSell(P)
-	post D not in set productsToSell(P);
-	--Get productsToSell for a product
-	public getProductsDelegation: Product`Type ==> set of Delegation
-	getProductsDelegation(P) == (return productsToSell(P));
-	--Generate delegations to be sent to productsToSell
-	public generateBatches: () ==> ()
-	generateBatches() == (
-		dcl n : nat;--number of productsToSell
-		--dcl batch :Batch;
+	
+	--Send products to delegations
+	public sendProducts: () ==> ()
+	sendProducts() == (
+		dcl n : nat;--number of delegations
 		for all product in set (dom stocks) do(
 			if(stocks(product) > 0) then(
-				n := card productsToSell(product);
+				--n := card productsToSell(product);
 				--for all delegation in set (productsToSell(product)) do(
 					--batch := new Batch(product);
 					--batch.addWeight(stocks(product) / n);
