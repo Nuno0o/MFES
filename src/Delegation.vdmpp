@@ -1,14 +1,15 @@
 class Delegation
 types
--- TODO Define types here
+	public Name = seq of char inv n == len n > 0;
+	public Stock = real inv s == s >= 0.0;
 values
 -- TODO Define values here
 instance variables
-	private name: seq of char;
-	private stocks : map Product`Type to real;
-	private customers : set of Consumer;
-	private baskets : map Basket to Consumer;
-	inv rng baskets subset customers;
+	public name: Name;
+	public stocks : map Product`Type to Stock;
+	public customers : set of Consumer;
+	public baskets : map Consumer to Basket;
+	inv dom baskets subset customers;
 operations
 	public Delegation: seq of char ==> Delegation
 	Delegation(N) == (name := N;stocks := { |-> };customers := {};baskets := { |-> };return self);
@@ -49,8 +50,8 @@ operations
 	--Give baskets to consumers
 	public giveBaskets: () ==> ()
 	giveBaskets() == (
-		for all basket in set (dom baskets) do(
-			baskets(basket).addBasket(basket);
+		for all customer in set (dom baskets) do(
+			customer.addBasket(baskets(customer));
 		);
 		baskets := { |-> };
 	)

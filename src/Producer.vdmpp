@@ -1,12 +1,13 @@
 class Producer
 types
--- TODO Define types here
+	public Name = seq of char inv n == len n > 0;
+	public Stock = real inv s == s >= 0.0;
 values
 -- TODO Define values here
 instance variables
-	private name : seq of char;
-	private stocks : map Product`Type to real;
-	private delegations : set of Delegation;
+	public name : Name;
+	public stocks : map Product`Type to Stock;
+	public delegations : set of Delegation;
 operations
 	public Producer: seq of char ==> Producer
 	Producer(Name) == (name := Name;stocks := { |-> };delegations := {} ; return self);
@@ -68,12 +69,9 @@ operations
 	--Send product to delegation
 	public sendToDelegation: Delegation * Product`Type * real ==> ()
 	sendToDelegation(D,P,Q) == (
-		dcl interc: set of Product`Type := D.getProducts() inter getProducts();
-		if(P in set interc) then(
-			D.addProductStock(P,Q);removeProductStock(P,Q);
-		)
+		D.addProductStock(P,Q);removeProductStock(P,Q);
 	)
-	pre Q <= stocks(P);
+	pre Q <= stocks(P) and P in set (dom stocks inter dom D.stocks);
 	
 	--Send products to delegations
 	public sendProducts: () ==> ()

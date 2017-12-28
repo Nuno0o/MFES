@@ -4,9 +4,9 @@ types
 values
 -- TODO Define values here
 instance variables
-	private name : seq of char;--Name of the consumer
-	private basketsize : Size;--Size of the baskets the consumer should receive
-	private baskets : seq of Basket;--Baskets the consumer has retrieved
+	public name : seq of char;--Name of the consumer
+	public basketsize : Size;--Size of the baskets the consumer should receive
+	public baskets : seq of Basket;--Baskets the consumer has retrieved
 operations
 	public Consumer: seq of char * Size ==> Consumer
 	Consumer(N,S) == (name := N; basketsize := S;baskets := []; return self);
