@@ -1,12 +1,11 @@
 class Producer
 types
 	public Name = seq of char inv n == len n > 0;
-	public Stock = real inv s == s >= 0.0;
 values
 -- TODO Define values here
 instance variables
 	public name : Name;
-	public stocks : map Product`Type to Stock;
+	public stocks : map Product`Type to Product`Stock;
 	public delegations : set of Delegation;
 operations
 	public Producer: seq of char ==> Producer
@@ -73,7 +72,7 @@ operations
 	)
 	pre Q <= stocks(P) and P in set (dom stocks inter dom D.stocks);
 	
-	--Send products to delegations
+	--Send products to delegations, being equally distributed
 	public sendProducts: () ==> ()
 	sendProducts() == (
 		dcl n : nat;--number of delegations that sell the current product

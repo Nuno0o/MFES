@@ -1,15 +1,14 @@
 class Delegation
 types
 	public Name = seq of char inv n == len n > 0;
-	public Stock = real inv s == s >= 0.0;
 values
 -- TODO Define values here
 instance variables
 	public name: Name;
-	public stocks : map Product`Type to Stock;
+	public stocks : map Product`Type to Product`Stock;
 	public customers : set of Consumer;
 	public baskets : map Consumer to Basket;
-	inv dom baskets subset customers;
+	inv dom baskets subset customers and forall b in set rng baskets & dom b.products subset dom stocks;
 operations
 	public Delegation: seq of char ==> Delegation
 	Delegation(N) == (name := N;stocks := { |-> };customers := {};baskets := { |-> };return self);
