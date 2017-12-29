@@ -46,6 +46,19 @@ operations
 	getStock(P) == (return stocks(P))
 	pre P in set(dom stocks);
 	
+	--Make basket
+	public makeBasket: Consumer ==> ()
+	makeBasket(C) == (
+		dcl b : Basket := new Basket(C.getBasketMaxSize()); 
+		baskets := baskets munion {C |-> b}
+	)
+	pre C in set customers;
+	
+	--Fill baskets
+	--public fillBaskets: () ==> ()
+	--fillBaskets() == (
+		--TODO
+	--);
 	
 	--Give baskets to consumers
 	public giveBaskets: () ==> ()
@@ -56,7 +69,7 @@ operations
 		baskets := { |-> };
 	)
 functions
-	
+	--Returns the N products with highest stock with descending order
 	public highestN: map Product`Type to Product`Stock * nat -> seq of Product`Type
 	highestN(P,N) == (highestNaux(P,N,[]));
 	
