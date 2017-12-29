@@ -1,15 +1,15 @@
 class Basket
 types
-public MaxSize = real inv n == n = 4 or n = 8;--Cesta grande ou pequena
+public MaxWeight = real inv n == n = 4 or n = 8;--Cesta grande ou pequena
 values
 instance variables
-	public maxSize : MaxSize;
+	public maxWeight : MaxWeight;
 	public stocks : Products;
-	inv totalWeight(stocks.products) <= maxSize;
-	inv maxSize = 4 => card(dom stocks.products) <= 3 and maxSize = 8 =>  card(dom stocks.products) <= 4;
+	inv totalWeight(stocks.products) <= maxWeight;
+	inv card(dom stocks.products) <= maxNProducts(maxWeight) ;
 operations
-	public Basket: MaxSize ==> Basket
-	Basket(MaxSize) == (maxSize := MaxSize ; stocks.products := { |-> });
+	public Basket: MaxWeight ==> Basket
+	Basket(M) == (maxWeight := M ; stocks.products := { |-> });
 	
 	--Add a product
 	public addProduct: Products`Type ==> ()
@@ -41,7 +41,7 @@ functions
 		if Products = { |-> } then 0 else let s in set dom Products in Products(s) + totalWeight({s} <-: Products)
 	);
 	--Max number of products
-	public maxNProducts: MaxSize -> nat
+	public maxNProducts: MaxWeight -> nat
 	maxNProducts(P) == (if P = 4 then 3 else if P = 8 then 4 else 0);
 traces
 -- TODO Define Combinatorial Test Traces here

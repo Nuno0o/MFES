@@ -4,13 +4,13 @@ values
 -- TODO Define values here
 instance variables
 	public name : seq of char;--Name of the consumer
-	public maxbasketsize : Basket`MaxSize;--Size of the baskets the consumer should receive
+	public maxbasketsize : Basket`MaxWeight;--Size of the baskets the consumer should receive
 	public baskets : seq of Basket;--Baskets the consumer has retrieved
 operations
-	public Consumer: seq of char * Basket`MaxSize ==> Consumer
+	public Consumer: seq of char * Basket`MaxWeight ==> Consumer
 	Consumer(N,S) == (name := N; maxbasketsize := S;baskets := []; return self);
 	
-	public getBasketMaxSize: () ==> Basket`MaxSize
+	public getBasketMaxSize: () ==> Basket`MaxWeight
 	getBasketMaxSize() == (return maxbasketsize);
 	
 	public getBaskets: () ==> seq of Basket

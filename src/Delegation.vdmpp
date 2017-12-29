@@ -54,12 +54,22 @@ operations
 			makeBasket(customer)
 	);
 	
-	--Fill baskets
+	--Fill basket
 	public fillBasket: Consumer ==> ()
 	fillBasket(C) == (
-		dcl products : seq of Products`Type := highestN(stocks.products,Basket`maxNProducts(baskets(C).maxSize));
+		dcl products : seq of Products`Type := highestN(stocks.products,Basket`maxNProducts(baskets(C).maxWeight));
+		dcl sum : real := 0;
+		for p in products do(
+			sum := sum + stocks.getStock(p);
+		);
+		for p in products do(
+			baskets(C).addProduct(p);
+			stocks.removeProductStock(p,stocks.getStock(p)*baskets(C).maxWeight/sum);
+			baskets(C).addProductStock(p,stocks.getStock(p)*baskets(C).maxWeight/sum);
+		);
 	)
-	pre card dom baskets(C).products = 0;
+	pre card dom baskets(C).stocks.products = 0 and card dom stocks.products > 0--No products are in the basket initially
+	post card dom baskets(C).stocks.products > 0;
 	
 	--Give basket to consumer
 	public giveBasket:Consumer ==> ()
@@ -93,6 +103,9 @@ functions
 	
 	public highestaux: map Products`Type to Products`Stock * Products`Type * real -> Products`Type
 	highestaux(P,Biggest,Max) == if(P = { |-> }) then Biggest else (let p in set dom P in if(P(p) > Max) then highestaux({p} <-: P,p,P(p)) else highestaux({p} <-: P,Biggest,Max));
+
+	public min: ? * ? -> ?
+	min(A,B) == (if A < B then A else B);
 traces
 -- TODO Define Combinatorial Test Traces here
 end Delegation
