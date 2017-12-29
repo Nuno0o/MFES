@@ -43,10 +43,11 @@ operations
 	getStock(P) == (return products(P))
 	pre P in set(dom products);
 functions
-public totalWeight: map Product`Type to Product`Stock -> real
-totalWeight(Products) == (
-	if Products = { |-> } then 0 else let s in set dom Products in Products(s) + totalWeight({s} <-: Products)
-);
+	--Total weight of products
+	public totalWeight: map Product`Type to Product`Stock -> real
+	totalWeight(Products) == (
+		if Products = { |-> } then 0 else let s in set dom Products in Products(s) + totalWeight({s} <-: Products)
+	);
 traces
 -- TODO Define Combinatorial Test Traces here
 end Basket

@@ -46,6 +46,7 @@ operations
 	getStock(P) == (return stocks(P))
 	pre P in set(dom stocks);
 	
+	
 	--Give baskets to consumers
 	public giveBaskets: () ==> ()
 	giveBaskets() == (
@@ -55,7 +56,19 @@ operations
 		baskets := { |-> };
 	)
 functions
--- TODO Define functiones here
+	
+	public highestN: map Product`Type to Product`Stock * nat -> seq of Product`Type
+	highestN(P,N) == (highestNaux(P,N,[]));
+	
+	public highestNaux: map Product`Type to Product`Stock * nat * seq of Product`Type -> seq of Product`Type
+	highestNaux(P,N,L) == if(N = 0 or P = { |-> }) then L else let c = highest(P) in highestNaux({c} <-: P, N-1, L^[c]);
+	
+	public highest: map Product`Type to Product`Stock -> Product`Type
+	highest(P) == highestaux(P,<Manga>,-1)
+	pre card dom P > 0;
+	
+	public highestaux: map Product`Type to Product`Stock * Product`Type * real -> Product`Type
+	highestaux(P,Biggest,Max) == if(P = { |-> }) then Biggest else (let p in set dom P in if(P(p) > Max) then highestaux({p} <-: P,p,P(p)) else highestaux({p} <-: P,Biggest,Max));
 traces
 -- TODO Define Combinatorial Test Traces here
 end Delegation

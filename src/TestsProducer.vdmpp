@@ -29,6 +29,12 @@ operations
 		assertTrue(p.getDelegations() = {d1,d2});
 		p.removeDelegation(d2);
 		assertTrue(p.getDelegations() = {d1});
+		d1.addProduct(<Manga>);
+		d1.addProduct(<Banana>);
+		d1.addProduct(<Pera>);
+		d1.addProductStock(<Manga>,10);
+		d1.addProductStock(<Banana>,5);
+		assertTrue(Delegation`highestN(d1.stocks,3) = [<Manga>,<Banana>,<Pera>]);
 	);
 functions
 -- TODO Define functiones here
