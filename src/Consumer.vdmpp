@@ -18,7 +18,8 @@ operations
 	
 	public addBasket: Basket ==> ()
 	addBasket(B) == (baskets := [B]^baskets)
-	post hd baskets = B;
+	pre B not in set elems baskets
+	post B in set elems baskets;
 functions
 -- TODO Define functiones here
 traces

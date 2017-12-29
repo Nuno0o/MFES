@@ -1,6 +1,6 @@
 class Products
 types
-	public static Type = <Maça> | <Pera> | <Manga> | <Batata> | <Banana> ;--Lista de tipos de produtos
+	public static Type = <Maça> | <Pera> | <Manga> | <Batata> | <Banana> | <Cenoura> | <Couve> | <Alface> | <Tomate>;--Lista de tipos de produtos
 	public static Stock = real inv s == s >= 0;
 values
 instance variables
