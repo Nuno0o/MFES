@@ -34,7 +34,7 @@ operations
 		d1.addProduct(<Pera>);
 		d1.addProductStock(<Manga>,10);
 		d1.addProductStock(<Banana>,5);
-		assertTrue(Delegation`highestN(d1.stocks,3) = [<Manga>,<Banana>,<Pera>]);
+		assertTrue(Delegation`highestN(d1.stocks.products,3) = [<Manga>,<Banana>,<Pera>]);
 	);
 functions
 -- TODO Define functiones here

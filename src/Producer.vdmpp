@@ -5,47 +5,38 @@ values
 -- TODO Define values here
 instance variables
 	public name : Name;
-	public stocks : map Product`Type to Product`Stock;
+	public stocks : Products;
 	public delegations : set of Delegation;
 operations
 	public Producer: seq of char ==> Producer
-	Producer(Name) == (name := Name;stocks := { |-> };delegations := {} ; return self);
+	Producer(Name) == (name := Name;stocks := new Products();delegations := {} ; return self);
 	--Get name
 	public getName:() ==> seq of char
 	getName() == (return name);
 	
 	--Add a product
-	public addProduct: Product`Type ==> ()
-	addProduct(P) == (stocks := stocks munion {P |-> 0};)
-	pre P not in set(dom stocks)
-	post P in set(dom stocks);
+	public addProduct: Products`Type ==> ()
+	addProduct(P) == (stocks.addProduct(P););
 	
 	--Remove a product
-	public removeProduct: Product`Type ==> ()
-	removeProduct(P) == (stocks := {P} <-: stocks)
-	pre P in set(dom stocks) 
-	post P not in set(dom stocks);
+	public removeProduct: Products`Type ==> ()
+	removeProduct(P) == (stocks.removeProduct(P));
 	
-	--Get products
-	public getProducts: () ==> set of Product`Type
-	getProducts() == (return dom stocks);
+	--Get product list
+	public getProducts: () ==> set of Products`Type
+	getProducts() == (return stocks.getProducts());
 	
 	--Add stock to a product
-	public addProductStock: Product`Type * real ==> ()
-	addProductStock(P,S) == (stocks := stocks ++ {P |-> stocks(P) + S})
-	pre P in set(dom stocks) and S >= 0
-	post stocks(P) >= S;
+	public addProductStock: Products`Type * real ==> ()
+	addProductStock(P,S) == (stocks.addProductStock(P,S));
 	
 	--Remove stock from a product
-	public removeProductStock: Product`Type * real ==> ()
-	removeProductStock(P,S) == (stocks := stocks ++ {P |-> stocks(P) - S})
-	pre P in set(dom stocks) and S >= 0 and S <= stocks(P)
-	post stocks(P) >= 0;
+	public removeProductStock: Products`Type * real ==> ()
+	removeProductStock(P,S) == (stocks.removeProductStock(P,S));
 	
 	--Get stock of a product
-	public getStock: Product`Type ==> real
-	getStock(P) == (return stocks(P))
-	pre P in set(dom stocks);
+	public getStock: Products`Type ==> real
+	getStock(P) == (return stocks.getStock(P));
 	
 	--Add a new delegation
 	public addDelegation: Delegation ==> ()
@@ -66,17 +57,17 @@ operations
 	getDelegations() == (return delegations);
 	
 	--Send product to delegation
-	public sendToDelegation: Delegation * Product`Type * real ==> ()
+	public sendToDelegation: Delegation * Products`Type * real ==> ()
 	sendToDelegation(D,P,Q) == (
 		D.addProductStock(P,Q);removeProductStock(P,Q);
 	)
-	pre Q <= stocks(P) and P in set (dom stocks inter dom D.stocks);
+	pre Q <= stocks.products(P) and P in set (dom stocks.products inter dom D.stocks.products);
 	
 	--Send products to delegations, being equally distributed
 	public sendProducts: () ==> ()
 	sendProducts() == (
 		dcl n : nat;--number of delegations that sell the current product
-		for all product in set (dom stocks) do(
+		for all product in set (dom stocks.products) do(
 			n := 0;
 			for all delegation in set delegations do (
 				if(product in set delegation.getProducts()) then n:= n+1;
@@ -85,7 +76,7 @@ operations
 				for all delegation in set delegations do(
 					if(product in set delegation.getProducts()) then sendToDelegation(delegation,product,getStock(product) / n);
 				);
-				stocks := stocks ++ {product |-> 0};
+				removeProductStock(product,getStock(product));
 			);
 		);
 	);
