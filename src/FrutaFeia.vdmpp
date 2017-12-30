@@ -4,11 +4,24 @@ types
 values
 -- TODO Define values here
 instance variables
-	public delegations : set of Delegation;
-	public producers : set of Producer;
-	public consumers : set of Consumer;
+	public delegations : seq of Delegation;
+	public producers : seq of Producer;
+	public consumers : seq of Consumer;
 operations
--- TODO Define operations here
+	--Constructor
+	public FrutaFeia : () ==> FrutaFeia
+	FrutaFeia() == (delegations := [];producers := [];consumers := []; return self;);
+	--Client ops
+	public newCustomer : Consumer`Name * Basket`MaxWeight ==> Consumer
+	newCustomer(N,M) == (
+		dcl customer : Consumer := new Consumer(N,M);
+		consumers := consumers ^ [customer];
+		return customer;
+	)
+	pre forall c in seq consumers & c.name <> N
+	post exists c in seq consumers & c.name = N;
+	
+	
 functions
 -- TODO Define functiones here
 traces
