@@ -1,8 +1,4 @@
 class FrutaFeia
-types
--- TODO Define types here
-values
--- TODO Define values here
 instance variables
 	public delegations : seq of Delegation;
 	public producers : seq of Producer;
@@ -15,7 +11,7 @@ operations
 	public newCustomer : Consumer`Name * Basket`MaxWeight ==> ()
 	newCustomer(N,M) == (
 		dcl customer : Consumer := new Consumer(N,M);
-		consumers := consumers ^ [customer];
+		consumers := [customer] ^ consumers;
 	)
 	pre forall c in seq consumers & c.name <> N
 	post exists c in seq consumers & c.name = N;
@@ -24,7 +20,7 @@ operations
 	public newDelegation: Delegation`Name ==> ()
 	newDelegation(N) == (
 		dcl delegation : Delegation := new Delegation(N);
-		delegations := delegations ^ [delegation];
+		delegations := [delegation] ^delegations;
 	)
 	pre forall d in seq delegations & d.name <> N
 	post exists d in seq delegations & d.name = N;
@@ -64,7 +60,7 @@ operations
 	public newProducer : Producer`Name ==> ()
 	newProducer(N) == (
 		dcl producer : Producer := new Producer(N);
-		producers := producers ^ [producer];
+		producers := [producer] ^ producers;
 	);
 	--add Product type to producer
 	public addProductPro: Delegation`Name * Products`Type ==> ()
@@ -112,6 +108,4 @@ functions
 	public getProByName: seq of Producer * Producer`Name -> [Producer]
 	getProByName(P,N)==(if P = [] then nil else if (hd P).name = N then (hd P) else getProByName(tl P, N))
 	pre exists p in seq P & p.name = N;
-traces
--- TODO Define Combinatorial Test Traces here
 end FrutaFeia

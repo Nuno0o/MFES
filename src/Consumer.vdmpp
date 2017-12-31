@@ -1,8 +1,6 @@
 class Consumer
 types
 	public Name = seq of char inv n == len n > 0;
-values
--- TODO Define values here
 instance variables
 	public name : Name;--Name of the consumer
 	public maxbasketsize : Basket`MaxWeight;--Size of the baskets the consumer should receive
@@ -21,8 +19,4 @@ operations
 	addBasket(B) == (baskets := [B]^baskets)
 	pre B not in set elems baskets
 	post B in set elems baskets;
-functions
--- TODO Define functiones here
-traces
--- TODO Define Combinatorial Test Traces here
 end Consumer

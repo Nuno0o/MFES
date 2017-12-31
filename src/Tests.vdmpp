@@ -1,22 +1,45 @@
 class Tests
-types
--- TODO Define types here
-values
--- TODO Define values here
-instance variables
--- TODO Define instance variables here
 operations
 	protected static assertTrue: bool ==> ()
 	assertTrue(arg) == (IO`print("Success\n"); return;)
 	pre arg;
-	
 	public static testAll: () ==> ()
 	testAll() == (
 		IO`print("\n");
-		TestsProducer`testOps();
+		testOps();
 	);
-functions
--- TODO Define functiones here
-traces
--- TODO Define Combinatorial Test Traces here
+	public static testOps : () ==> ()
+	testOps() == (
+		dcl fruta:FrutaFeia := new FrutaFeia();
+		fruta.newProducer("p1");
+		fruta.addProductPro("p1",<Banana>);
+		fruta.addProductPro("p1",<Manga>);
+		fruta.addProductPro("p1",<Pera>);
+		fruta.removeProductPro("p1",<Pera>);
+		fruta.addProductStockPro("p1",<Banana>,10);
+		fruta.addProductStockPro("p1",<Manga>,15);
+		fruta.removeProductStockPro("p1",<Banana>,2);
+		fruta.newDelegation("d1");
+		fruta.newDelegation("d2");
+		fruta.addProductDel("d1",<Banana>);
+		fruta.addProductDel("d1",<Manga>);
+		fruta.addProductDel("d2",<Banana>);
+		fruta.addProductDel("d2",<Manga>);
+		fruta.removeProductDel("d2",<Manga>);
+		fruta.addDelToPro("p1","d1");
+		fruta.addDelToPro("p1","d2");
+		fruta.removeDelFromPro("p1","d2");
+		fruta.addDelToPro("p1","d2");
+		fruta.sendToDels("p1");
+		--Tests`assertTrue((hd fruta.delegations).getStock(<Banana>) = 4);
+		fruta.newCustomer("c1",8);
+		fruta.newCustomer("c2",4);
+		fruta.newCustomer("c3",4);
+		fruta.addCustomer("d1","c1");
+		fruta.addCustomer("d1","c2");
+		fruta.addCustomer("d1","c3");
+		fruta.removeCustomer("d1","c3");
+		fruta.makeAndFillBaskets("d1");
+		fruta.sendBaskets("d1");
+	);
 end Tests

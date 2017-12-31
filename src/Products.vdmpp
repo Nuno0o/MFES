@@ -2,7 +2,6 @@ class Products
 types
 	public static Type = <Maça> | <Pera> | <Manga> | <Batata> | <Banana> | <Cenoura> | <Couve> | <Alface> | <Tomate>;--Lista de tipos de produtos
 	public static Stock = real inv s == s >= 0;
-values
 instance variables
 	public products : map Type to Stock;
 operations
@@ -41,6 +40,4 @@ operations
 	public getStock: Type ==> real
 	getStock(P) == (return products(P))
 	pre P in set(dom products);
-functions
-traces
 end Products

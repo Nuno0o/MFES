@@ -1,7 +1,6 @@
 class Basket
 types
 public MaxWeight = real inv n == n = 4 or n = 8;--Cesta grande ou pequena
-values
 instance variables
 	public maxWeight : MaxWeight;
 	public stocks : Products;
@@ -9,15 +8,11 @@ instance variables
 	inv card(dom stocks.products) <= maxNProducts(maxWeight) ;
 operations
 	public Basket: MaxWeight ==> Basket
-	Basket(M) == (maxWeight := M ; stocks.products := { |-> });
+	Basket(M) == (maxWeight := M ; stocks := new Products();return self);
 	
 	--Add a product
 	public addProduct: Products`Type ==> ()
 	addProduct(P) == (stocks.addProduct(P););
-	
-	--Remove a product
-	public removeProduct: Products`Type ==> ()
-	removeProduct(P) == (stocks.removeProduct(P));
 	
 	--Get product list
 	public getProducts: () ==> set of Products`Type
@@ -26,10 +21,6 @@ operations
 	--Add stock to a product
 	public addProductStock: Products`Type * real ==> ()
 	addProductStock(P,S) == (stocks.addProductStock(P,S));
-	
-	--Remove stock from a product
-	public removeProductStock: Products`Type * real ==> ()
-	removeProductStock(P,S) == (stocks.removeProductStock(P,S));
 	
 	--Get stock of a product
 	public getStock: Products`Type ==> real
@@ -43,6 +34,4 @@ functions
 	--Max number of products
 	public maxNProducts: MaxWeight -> nat
 	maxNProducts(P) == (if P = 4 then 3 else if P = 8 then 4 else 0);
-traces
--- TODO Define Combinatorial Test Traces here
 end Basket

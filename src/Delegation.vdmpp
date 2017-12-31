@@ -1,8 +1,6 @@
 class Delegation
 types
 	public Name = seq of char inv n == len n > 0;
-values
--- TODO Define values here
 instance variables
 	public name: Name;
 	public stocks : Products;
@@ -83,7 +81,7 @@ operations
 		);
 		for p in products do(
 			baskets(C).addProduct(p);
-			stocks.removeProductStock(p,stocks.getStock(p)*baskets(C).maxWeight/sum);
+			removeProductStock(p,stocks.getStock(p)*baskets(C).maxWeight/sum);
 			baskets(C).addProductStock(p,stocks.getStock(p)*baskets(C).maxWeight/sum);
 		);
 	)
@@ -96,7 +94,7 @@ operations
 		dcl B: Basket;
 		B := baskets(C);
 		baskets := {C} <-: baskets;
-		C.addBasket(baskets(C));
+		C.addBasket(B);
 	)
 	pre C in set dom baskets;
 	
@@ -122,9 +120,4 @@ functions
 	
 	public highestaux: map Products`Type to Products`Stock * Products`Type * real -> Products`Type
 	highestaux(P,Biggest,Max) == if(P = { |-> }) then Biggest else (let p in set dom P in if(P(p) > Max) then highestaux({p} <-: P,p,P(p)) else highestaux({p} <-: P,Biggest,Max));
-
-	public min: ? * ? -> ?
-	min(A,B) == (if A < B then A else B);
-traces
--- TODO Define Combinatorial Test Traces here
 end Delegation

@@ -1,8 +1,6 @@
 class Producer
 types
 	public Name = seq of char inv n == len n > 0;
-values
--- TODO Define values here
 instance variables
 	public name : Name;
 	public stocks : Products;
@@ -67,21 +65,19 @@ operations
 	public sendProducts: () ==> ()
 	sendProducts() == (
 		dcl n : nat;--number of delegations that sell the current product
+		dcl s : nat;
 		for all product in set (dom stocks.products) do(
 			n := 0;
 			for all delegation in set delegations do (
 				if(product in set delegation.getProducts()) then n:= n+1;
 			);
 			if(getStock(product) > 0) then(
+				s := getStock(product);
 				for all delegation in set delegations do(
-					if(product in set delegation.getProducts()) then sendToDelegation(delegation,product,getStock(product) / n);
+					if(product in set delegation.getProducts()) then sendToDelegation(delegation,product,s / n);
 				);
 				removeProductStock(product,getStock(product));
 			);
 		);
 	);
-functions
--- TODO Define functiones here
-traces
--- TODO Define Combinatorial Test Traces here
 end Producer
