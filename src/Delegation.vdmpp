@@ -12,8 +12,20 @@ instance variables
 	inv forall b in set rng baskets & dom b.stocks.products subset dom stocks.products;
 	inv forall c in set customers & elems c.baskets inter rng baskets = {};
 operations
-	public Delegation: seq of char ==> Delegation
+	public Delegation: Name ==> Delegation
 	Delegation(N) == (name := N;stocks := new Products();customers := {};baskets := { |-> };return self);
+	
+	--Add customer
+	public addCustomer: Consumer ==> ()
+	addCustomer(C) == (customers := customers union {C})
+	pre C not in set customers
+	post C in set customers;
+	
+	--Remove customer
+	public removeCustomer: Consumer ==> ()
+	removeCustomer(C) == (customers := customers \ {C})
+	pre C in set customers
+	post C not in set customers;
 	
 	--Add a product
 	public addProduct: Products`Type ==> ()
@@ -52,6 +64,13 @@ operations
 	makeBaskets() == (
 		for all customer in set customers do
 			makeBasket(customer)
+	);
+	
+	--Fill baskets
+	public fillBaskets: () ==> ()
+	fillBaskets() == (
+		for all c in set customers do
+			fillBasket(c);
 	);
 	
 	--Fill basket

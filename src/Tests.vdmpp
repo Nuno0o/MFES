@@ -13,7 +13,7 @@ operations
 	public static testAll: () ==> ()
 	testAll() == (
 		IO`print("\n");
-		TestsProducer`testProducerOps();
+		TestsProducer`testOps();
 	);
 functions
 -- TODO Define functiones here

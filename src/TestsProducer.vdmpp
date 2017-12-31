@@ -36,6 +36,13 @@ operations
 		d1.addProductStock(<Banana>,5);
 		assertTrue(Delegation`highestN(d1.stocks.products,3) = [<Manga>,<Banana>,<Pera>]);
 	);
+	
+	public static testOps : () ==> ()
+	testOps() == (
+		dcl fruta:FrutaFeia := new FrutaFeia();
+		fruta.newCustomer("c1",8);
+		fruta.newDelegation("d1");
+	);
 functions
 -- TODO Define functiones here
 traces
