@@ -51,11 +51,6 @@ operations
 		getDelByName(delegations,DN).makeBaskets();
 		getDelByName(delegations,DN).fillBaskets();
 	);
-	--give baskets to customers
-	public sendBaskets : Delegation`Name ==> ()
-	sendBaskets(DN) == (
-		getDelByName(delegations,DN).giveBaskets();
-	);
 	--New producer
 	public newProducer : Producer`Name ==> ()
 	newProducer(N) == (

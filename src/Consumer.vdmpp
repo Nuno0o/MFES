@@ -5,9 +5,10 @@ instance variables
 	public name : Name;--Name of the consumer
 	public maxbasketsize : Basket`MaxWeight;--Size of the baskets the consumer should receive
 	public baskets : seq of Basket;--Baskets the consumer has retrieved
+	public delegation : [Delegation];--Delegation
 operations
 	public Consumer: seq of char * Basket`MaxWeight ==> Consumer
-	Consumer(N,S) == (name := N; maxbasketsize := S;baskets := []; return self);
+	Consumer(N,S) == (name := N; maxbasketsize := S;baskets := []; delegation := nil; return self);
 	
 	public getBasketMaxSize: () ==> Basket`MaxWeight
 	getBasketMaxSize() == (return maxbasketsize);
@@ -19,4 +20,17 @@ operations
 	addBasket(B) == (baskets := [B]^baskets)
 	pre B not in set elems baskets
 	post B in set elems baskets;
+	
+	public setDelegation : Delegation ==> ()
+	setDelegation(D) == (delegation := D);
+	
+	public fetchBasket : () ==> ()
+	fetchBasket() == (
+		delegation.giveBasket(self)
+	);
+	public cancelBasket : () ==> ()
+	cancelBasket() == (
+		delegation.cancelBasket(self)
+	);
+	
 end Consumer

@@ -15,7 +15,7 @@ operations
 	
 	--Add customer
 	public addCustomer: Consumer ==> ()
-	addCustomer(C) == (customers := customers union {C})
+	addCustomer(C) == (customers := customers union {C};C.setDelegation(self))
 	pre C not in set customers
 	post C in set customers;
 	
@@ -98,14 +98,12 @@ operations
 	)
 	pre C in set dom baskets;
 	
-	--Give baskets to consumers
-	public giveBaskets: () ==> ()
-	giveBaskets() == (
-		for all customer in set (dom baskets) do(
-			giveBasket(customer)
-		);
-		baskets := { |-> };
+	--Cancel basket from consumer
+	public cancelBasket:Consumer ==> ()
+	cancelBasket(C) == (
+		baskets := {C} <-: baskets;
 	)
+	pre C in set dom baskets;
 functions
 	--Returns the N products with highest stock with descending order
 	public highestN: map Products`Type to Products`Stock * nat -> seq of Products`Type
