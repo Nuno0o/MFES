@@ -1,6 +1,6 @@
 class Products
 types
-	public static Type = <Maça> | <Pera> | <Manga> | <Batata> | <Banana> | <Cenoura> | <Couve> | <Alface> | <Tomate>;--Lista de tipos de produtos
+	public static Type = <Maça> | <Pera> | <Manga> | <Banana> ;
 	public static Stock = real inv s == s >= 0;
 instance variables
 	public products : map Type to Stock;
@@ -32,4 +32,13 @@ operations
 	public getStock: Type ==> real
 	getStock(P) == (return products(P))
 	pre P in set(dom products);
+functions
+	public enumToString: Type -> seq of char
+	enumToString(T) == (
+		if T = <Maça> then "Maça" else if T = <Pera> then "Pera" else if T = <Manga> then "Manga" else if T = <Banana> then "Banana" else ""
+	);
+	public stringToEnum: seq of char -> [Type]
+	stringToEnum(T) == (
+		if T = "Maça" then <Maça> else if T = "Pera" then <Pera> else if T = "Manga" then <Manga> else if T = "Banana" then <Banana> else nil
+	);
 end Products
