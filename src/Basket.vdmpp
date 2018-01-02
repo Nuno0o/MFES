@@ -1,11 +1,11 @@
 class Basket
 types
-public MaxWeight = real inv n == n = 4 or n = 8;--Cesta grande ou pequena
+public MaxWeight = <Grande> | <Pequena>;--Cesta grande ou pequena
 instance variables
 	public maxWeight : MaxWeight;
 	public stocks : Products;
 	--O peso maximo da cesta nao pode ser excedido
-	inv totalWeight(stocks.products) <= maxWeight;
+	inv totalWeight(stocks.products) <= maxWeightW(maxWeight);
 	--O número máximo de tipos de produtos não pode ser excedido(se for cesta de 4 quilos entao o maximo e 3, se for cesta de 8 quilos é 4)
 	inv card(dom stocks.products) <= maxNProducts(maxWeight);
 operations
@@ -23,6 +23,9 @@ operations
 	--Get stock of a product
 	public getStock: Products`Type ==> real
 	getStock(P) == (return stocks.getStock(P));
+	--get max weight
+	public getMaxWeight: () ==> real
+	getMaxWeight() == (return maxWeightW(maxWeight));
 functions
 	--Total weight of products
 	public totalWeight: map Products`Type to Products`Stock -> real
@@ -31,5 +34,8 @@ functions
 	);
 	--Max number of products
 	public maxNProducts: MaxWeight -> nat
-	maxNProducts(P) == (if P = 4 then 3 else if P = 8 then 4 else 0);
+	maxNProducts(P) == (if P = <Pequena> then 3 else if P = <Grande> then 4 else 0);
+	--max weight
+	public maxWeightW: MaxWeight -> real
+	maxWeightW(P) == (if P = <Pequena> then 4 else if P = <Grande> then 8 else 0);
 end Basket
