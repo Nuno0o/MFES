@@ -1,6 +1,6 @@
 class Products
 types
-	public static Type = seq of char;
+	public static Type = seq of char inv t == len t > 0;
 	public static Stock = real inv s == s >= 0;
 instance variables
 	public products : map Type to Stock;
