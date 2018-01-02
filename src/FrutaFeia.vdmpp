@@ -6,6 +6,30 @@ instance variables
 	inv forall d in seq delegations & d.customers subset elems consumers;
 	inv forall p in seq producers & p.delegations subset elems delegations;
 operations
+	--List delegations
+	public getDelegations : () ==> seq of Delegation
+	getDelegations() == (return delegations);
+	--List producers
+	public getProducers : () ==> seq of Producer
+	getProducers() == (return producers);
+	--List delegations
+	public getConsumers : () ==> seq of Consumer
+	getConsumers() == (return consumers);
+	--List of delegations of a producer
+	public getDelPro: Producer`Name ==> set of Delegation
+	getDelPro(PN) == (
+		return getProByName(producers,PN).getDelegations()
+	);
+	--N baskets a customer has received
+	public getNBaskets: Consumer`Name ==> nat
+	getNBaskets(CN) == (
+		return len getConByName(consumers,CN).getBaskets()
+	);
+	--Get last basket
+	public getLastBasket: Consumer`Name ==> Basket
+	getLastBasket(CN) == (
+		return hd getConByName(consumers,CN).getBaskets()
+	);
 	--Constructor
 	public FrutaFeia : () ==> FrutaFeia
 	FrutaFeia() == (delegations := [];producers := [];consumers := []; return self;);
@@ -92,6 +116,12 @@ operations
 	--send prods from producer to delegations
 	public sendToDels : Producer`Name ==> ()
 	sendToDels(PN) == (getProByName(producers,PN).sendProducts());
+	--fetch basket
+	public fetchBasket : Consumer`Name ==> ()
+	fetchBasket(CN) == (getConByName(consumers,CN).fetchBasket());
+	--cancel basket
+	public cancelBasket : Consumer`Name ==> ()
+	cancelBasket(CN) == (getConByName(consumers,CN).cancelBasket());
 functions
 	public getDelByName: seq of Delegation * Delegation`Name -> [Delegation]
 	getDelByName(D,N)==(if D = [] then nil else if (hd D).name = N then (hd D) else getDelByName(tl D, N))

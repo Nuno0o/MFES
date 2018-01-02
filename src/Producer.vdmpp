@@ -8,9 +8,6 @@ instance variables
 operations
 	public Producer: seq of char ==> Producer
 	Producer(Name) == (name := Name;stocks := new Products();delegations := {} ; return self);
-	--Get name
-	public getName:() ==> seq of char
-	getName() == (return name);
 	--Add a product
 	public addProduct: Products`Type ==> ()
 	addProduct(P) == (stocks.addProduct(P););

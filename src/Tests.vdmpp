@@ -11,34 +11,60 @@ operations
 	public static testOps : () ==> ()
 	testOps() == (
 		dcl fruta:FrutaFeia := new FrutaFeia();
+		dcl p : Producer;
+		dcl d1: Delegation;
+		dcl d2:Delegation;
+		dcl c1:Consumer;
+		dcl c2:Consumer;
+		dcl c3:Consumer;
+		
 		fruta.newProducer("p1");
 		fruta.addProductPro("p1",<Banana>);
 		fruta.addProductPro("p1",<Manga>);
 		fruta.addProductPro("p1",<Pera>);
+			p := fruta.getProByName(fruta.getProducers(),"p1");
+			Tests`assertTrue(p.getProducts() = {<Banana>,<Manga>,<Pera>});
 		fruta.removeProductPro("p1",<Pera>);
+			Tests`assertTrue(p.getProducts() = {<Banana>,<Manga>});
 		fruta.addProductStockPro("p1",<Banana>,10);
+			Tests`assertTrue(p.getStock(<Banana>) = 10);
 		fruta.addProductStockPro("p1",<Manga>,15);
 		fruta.removeProductStockPro("p1",<Banana>,2);
+			Tests`assertTrue(p.getStock(<Banana>) = 8);
 		fruta.newDelegation("d1");
 		fruta.newDelegation("d2");
+			d1 := fruta.getDelByName(fruta.getDelegations(),"d1");
+			d2 := fruta.getDelByName(fruta.getDelegations(),"d2");
 		fruta.addProductDel("d1",<Banana>);
 		fruta.addProductDel("d1",<Manga>);
 		fruta.addProductDel("d2",<Banana>);
 		fruta.addProductDel("d2",<Manga>);
 		fruta.removeProductDel("d2",<Manga>);
+			Tests`assertTrue(d2.getProducts() = {<Banana>});
 		fruta.addDelToPro("p1","d1");
 		fruta.addDelToPro("p1","d2");
+			Tests`assertTrue(fruta.getDelPro("p1") = {d1,d2});
 		fruta.removeDelFromPro("p1","d2");
 		fruta.addDelToPro("p1","d2");
 		fruta.sendToDels("p1");
-		--Tests`assertTrue((hd fruta.delegations).getStock(<Banana>) = 4);
+			Tests`assertTrue(d1.getStock(<Banana>) = 4);
 		fruta.newCustomer("c1",8);
 		fruta.newCustomer("c2",4);
 		fruta.newCustomer("c3",4);
 		fruta.addCustomer("d1","c1");
 		fruta.addCustomer("d1","c2");
 		fruta.addCustomer("d1","c3");
+			c1 := fruta.getConByName(fruta.getConsumers(),"c1");
+			c2 := fruta.getConByName(fruta.getConsumers(),"c2");
+			c3 := fruta.getConByName(fruta.getConsumers(),"c3");
 		fruta.removeCustomer("d1","c3");
+			Tests`assertTrue(d1.customers = {c1,c2});
 		fruta.makeAndFillBaskets("d1");
+			Tests`assertTrue(card dom d1.baskets = 2);--tem 2 cestos prontos
+		fruta.fetchBasket("c1");
+			Tests`assertTrue(fruta.getNBaskets("c1") = 1);
+		fruta.cancelBasket("c2");
+			Tests`assertTrue(fruta.getLastBasket("c1").getProducts() = {<Banana>,<Manga>});
+			Tests`assertTrue(fruta.getLastBasket("c1").getStock(<Manga>) > fruta.getLastBasket("c1").getStock(<Banana>));
 	);
 end Tests
