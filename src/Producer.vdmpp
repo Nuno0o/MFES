@@ -11,37 +11,29 @@ operations
 	--Get name
 	public getName:() ==> seq of char
 	getName() == (return name);
-	
 	--Add a product
 	public addProduct: Products`Type ==> ()
 	addProduct(P) == (stocks.addProduct(P););
-	
 	--Remove a product
 	public removeProduct: Products`Type ==> ()
 	removeProduct(P) == (stocks.removeProduct(P));
-	
 	--Get product list
 	public getProducts: () ==> set of Products`Type
 	getProducts() == (return stocks.getProducts());
-	
 	--Add stock to a product
 	public addProductStock: Products`Type * real ==> ()
 	addProductStock(P,S) == (stocks.addProductStock(P,S));
-	
 	--Remove stock from a product
 	public removeProductStock: Products`Type * real ==> ()
 	removeProductStock(P,S) == (stocks.removeProductStock(P,S));
-	
 	--Get stock of a product
 	public getStock: Products`Type ==> real
 	getStock(P) == (return stocks.getStock(P));
-	
 	--Add a new delegation
 	public addDelegation: Delegation ==> ()
 	addDelegation(D) == (delegations := delegations union {D})
 	pre D not in set delegations
 	post D in set delegations;
-	
 	--Remove a delegation
 	public removeDelegation: Delegation ==> ()
 	removeDelegation(D) == (
@@ -49,18 +41,15 @@ operations
 	)
 	pre D in set delegations
 	post D not in set delegations;
-	
 	--Get list of delegations
 	public getDelegations: () ==> set of Delegation
 	getDelegations() == (return delegations);
-	
 	--Send product to delegation
 	public sendToDelegation: Delegation * Products`Type * real ==> ()
 	sendToDelegation(D,P,Q) == (
 		D.addProductStock(P,Q);removeProductStock(P,Q);
 	)
 	pre Q <= stocks.products(P) and P in set (dom stocks.products inter dom D.stocks.products);
-	
 	--Send products to delegations, being equally distributed
 	public sendProducts: () ==> ()
 	sendProducts() == (

@@ -4,24 +4,22 @@ public MaxWeight = real inv n == n = 4 or n = 8;--Cesta grande ou pequena
 instance variables
 	public maxWeight : MaxWeight;
 	public stocks : Products;
+	--O peso maximo da cesta nao pode ser excedido
 	inv totalWeight(stocks.products) <= maxWeight;
-	inv card(dom stocks.products) <= maxNProducts(maxWeight) ;
+	--O número máximo de tipos de produtos não pode ser excedido(se for cesta de 4 quilos entao o maximo e 3, se for cesta de 8 quilos é 4)
+	inv card(dom stocks.products) <= maxNProducts(maxWeight);
 operations
 	public Basket: MaxWeight ==> Basket
 	Basket(M) == (maxWeight := M ; stocks := new Products();return self);
-	
 	--Add a product
 	public addProduct: Products`Type ==> ()
 	addProduct(P) == (stocks.addProduct(P););
-	
 	--Get product list
 	public getProducts: () ==> set of Products`Type
 	getProducts() == (return stocks.getProducts());
-	
 	--Add stock to a product
 	public addProductStock: Products`Type * real ==> ()
 	addProductStock(P,S) == (stocks.addProductStock(P,S));
-	
 	--Get stock of a product
 	public getStock: Products`Type ==> real
 	getStock(P) == (return stocks.getStock(P));

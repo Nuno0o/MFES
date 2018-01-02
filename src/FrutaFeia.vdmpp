@@ -3,6 +3,8 @@ instance variables
 	public delegations : seq of Delegation;
 	public producers : seq of Producer;
 	public consumers : seq of Consumer;
+	inv forall d in seq delegations & d.customers subset elems consumers;
+	inv forall p in seq producers & p.delegations subset elems delegations;
 operations
 	--Constructor
 	public FrutaFeia : () ==> FrutaFeia
@@ -90,7 +92,6 @@ operations
 	--send prods from producer to delegations
 	public sendToDels : Producer`Name ==> ()
 	sendToDels(PN) == (getProByName(producers,PN).sendProducts());
-
 functions
 	public getDelByName: seq of Delegation * Delegation`Name -> [Delegation]
 	getDelByName(D,N)==(if D = [] then nil else if (hd D).name = N then (hd D) else getDelByName(tl D, N))

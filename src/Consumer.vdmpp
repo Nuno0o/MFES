@@ -9,25 +9,26 @@ instance variables
 operations
 	public Consumer: seq of char * Basket`MaxWeight ==> Consumer
 	Consumer(N,S) == (name := N; maxbasketsize := S;baskets := []; delegation := nil; return self);
-	
+	--Get max size of the baskets he shall receive
 	public getBasketMaxSize: () ==> Basket`MaxWeight
 	getBasketMaxSize() == (return maxbasketsize);
-	
+	--Get seq of baskets the customer has already received
 	public getBaskets: () ==> seq of Basket
 	getBaskets() == (return baskets);
-	
+	--Add a new basket
 	public addBasket: Basket ==> ()
 	addBasket(B) == (baskets := [B]^baskets)
 	pre B not in set elems baskets
 	post B in set elems baskets;
-	
+	--Define delegation
 	public setDelegation : Delegation ==> ()
 	setDelegation(D) == (delegation := D);
-	
+	--Fetch the basket in case its available
 	public fetchBasket : () ==> ()
 	fetchBasket() == (
 		delegation.giveBasket(self)
 	);
+	--Cancel the current basket
 	public cancelBasket : () ==> ()
 	cancelBasket() == (
 		delegation.cancelBasket(self)
