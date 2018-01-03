@@ -17,53 +17,78 @@ operations
 		dcl c1:Consumer;
 		dcl c2:Consumer;
 		dcl c3:Consumer;
+		--Create a new Producer and add products to it
 		fruta.newProducer("p1");
 		fruta.addProductPro("p1","Banana");
 		fruta.addProductPro("p1","Manga");
 		fruta.addProductPro("p1","Pera");
 			p := fruta.getProByName(fruta.getProducers(),"p1");
+			--Assert that the products are correct
 			Tests`assertTrue(p.getProducts() = {"Banana","Manga","Pera"});
+			--Remove a product
 		fruta.removeProductPro("p1","Pera");
+		--Assert that the products are correct
 			Tests`assertTrue(p.getProducts() = {"Banana","Manga"});
+			--Add stock to the products and assert the stock is correct
 		fruta.addProductStockPro("p1","Banana",10);
 			Tests`assertTrue(p.getStock("Banana") = 10);
 		fruta.addProductStockPro("p1","Manga",15);
 		fruta.removeProductStockPro("p1","Banana",2);
 			Tests`assertTrue(p.getStock("Banana") = 8);
+			--Create new delegations
 		fruta.newDelegation("d1");
 		fruta.newDelegation("d2");
 			d1 := fruta.getDelByName(fruta.getDelegations(),"d1");
 			d2 := fruta.getDelByName(fruta.getDelegations(),"d2");
+			--Add products that the delegation wants
 		fruta.addProductDel("d1","Banana");
 		fruta.addProductDel("d1","Manga");
 		fruta.addProductDel("d2","Banana");
 		fruta.addProductDel("d2","Manga");
+		--Remove a product
 		fruta.removeProductDel("d2","Manga");
+		--Assert that the list of products is correct
 			Tests`assertTrue(d2.getProducts() = {"Banana"});
+			--Add delegation to list of delegations of the producer p1
 		fruta.addDelToPro("p1","d1");
 		fruta.addDelToPro("p1","d2");
+		--Assert that the delecation set is correct
 			Tests`assertTrue(fruta.getDelPro("p1") = {d1,d2});
+			--Remove delegation from producer
 		fruta.removeDelFromPro("p1","d2");
 		fruta.addDelToPro("p1","d2");
+		--Send producer products to its client delegations
 		fruta.sendToDels("p1");
+		--Assert that, having 2 delegations that want bananas, half the bananas were sent to each
 			Tests`assertTrue(d1.getStock("Banana") = 4);
+			--Create new customer
 		fruta.newCustomer("c1",<Grande>);
 		fruta.newCustomer("c2",<Pequena>);
 		fruta.newCustomer("c3",<Pequena>);
+		--Add customers to delegations
 		fruta.addCustomer("d1","c1");
 		fruta.addCustomer("d1","c2");
 		fruta.addCustomer("d1","c3");
 			c1 := fruta.getConByName(fruta.getConsumers(),"c1");
 			c2 := fruta.getConByName(fruta.getConsumers(),"c2");
 			c3 := fruta.getConByName(fruta.getConsumers(),"c3");
+			--Removea customer
 		fruta.removeCustomer("d1","c3");
+		--Assert that the list of customers of the delegation is correct
 			Tests`assertTrue(d1.customers = {c1,c2});
+			--Make baskets and fill them
 		fruta.makeAndFillBaskets("d1");
-			Tests`assertTrue(card dom d1.baskets = 2);--tem 2 cestos prontos
+		--Assert that 2 baskets were made
+			Tests`assertTrue(card dom d1.baskets = 2);
+			--c1 Fetch basket
 		fruta.fetchBasket("c1");
+		--Assert that the client got the basket
 			Tests`assertTrue(fruta.getNBaskets("c1") = 1);
+			--Cancel basket
 		fruta.cancelBasket("c2");
+		--Assert that the products in the basket are the products in the delegation(Banana and Manga)
 			Tests`assertTrue(fruta.getLastBasket("c1").getProducts() = {"Banana","Manga"});
+			--Assert that the basket has more Manga than Banana, because the delegation had more Manga than Banana(15 vs 4)
 			Tests`assertTrue(fruta.getLastBasket("c1").getStock("Manga") > fruta.getLastBasket("c1").getStock("Banana"));
 	);
 end Tests
