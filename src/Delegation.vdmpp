@@ -41,7 +41,7 @@ operations
 	--Get stock of a product
 	public getStock: Products`Type ==> real
 	getStock(P) == (return stocks.getStock(P));
-	--Make basket
+	--Make a new empty basket for a certain customer(requires that a basket does not already exist for this customer)
 	public makeBasket: Consumer ==> ()
 	makeBasket(C) == (
 		dcl b : Basket := new Basket(C.getBasketMaxSize()); 
@@ -49,13 +49,13 @@ operations
 	)
 	pre C in set customers and C not in set dom baskets
 	post C in set dom baskets;
-	--Make baskets
+	--Make baskets for every customer
 	public makeBaskets: () ==> ()
 	makeBaskets() == (
 		for all customer in set customers do
 			makeBasket(customer)
 	);
-	--Fill basket
+	--Fill the basket of a customer with the (3 or 4) highest stock products in the company, being proportionally distributed
 	public fillBasket: Consumer ==> ()
 	fillBasket(C) == (
 		dcl products : seq of Products`Type := highestN(stocks.products,Basket`maxNProducts(baskets(C).maxWeight));
@@ -69,7 +69,7 @@ operations
 			baskets(C).addProductStock(p,stocks.getStock(p)*baskets(C).getMaxWeight()/sum);
 		);
 	)
-	pre card dom baskets(C).stocks.products = 0 and card dom stocks.products > 0--No products are in the basket initially
+	pre C in set dom baskets and card dom baskets(C).stocks.products = 0 and card dom stocks.products > 0--No products are in the basket initially
 	post card dom baskets(C).stocks.products > 0;
 	--Fill baskets
 	public fillBaskets: () ==> ()
@@ -77,7 +77,7 @@ operations
 		for all c in set customers do
 			fillBasket(c);
 	);
-	--Give basket to consumer
+	--Give basket to consumer and remove it from delegation
 	public giveBasket:Consumer ==> ()
 	giveBasket(C) == (
 		dcl B: Basket;
@@ -86,7 +86,7 @@ operations
 		C.addBasket(B);
 	)
 	pre C in set dom baskets;
-	--Cancel basket from consumer
+	--Cancel basket from consumer(just remove from delegation)
 	public cancelBasket:Consumer ==> ()
 	cancelBasket(C) == (
 		baskets := {C} <-: baskets;

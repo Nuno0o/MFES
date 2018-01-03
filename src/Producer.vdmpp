@@ -43,7 +43,7 @@ operations
 	public sendToDelegation: Delegation * Products`Type * real ==> ()
 	sendToDelegation(D,P,Q) == (D.addProductStock(P,Q);removeProductStock(P,Q);)
 	pre Q <= stocks.products(P) and P in set (dom stocks.products inter dom D.stocks.products);
-	--Send products to delegations, being equally distributed
+	--For each delegation associated with the producer, send products that they need, being equally distributed among all delegations that seek a certain product
 	public sendProducts: () ==> ()
 	sendProducts() == (
 		dcl n : nat;--number of delegations that sell the current product
