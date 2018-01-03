@@ -33,9 +33,7 @@ operations
 	post D in set delegations;
 	--Remove a delegation
 	public removeDelegation: Delegation ==> ()
-	removeDelegation(D) == (
-		delegations := delegations \ {D};
-	)
+	removeDelegation(D) == (delegations := delegations \ {D};)
 	pre D in set delegations
 	post D not in set delegations;
 	--Get list of delegations
@@ -43,9 +41,7 @@ operations
 	getDelegations() == (return delegations);
 	--Send product to delegation
 	public sendToDelegation: Delegation * Products`Type * real ==> ()
-	sendToDelegation(D,P,Q) == (
-		D.addProductStock(P,Q);removeProductStock(P,Q);
-	)
+	sendToDelegation(D,P,Q) == (D.addProductStock(P,Q);removeProductStock(P,Q);)
 	pre Q <= stocks.products(P) and P in set (dom stocks.products inter dom D.stocks.products);
 	--Send products to delegations, being equally distributed
 	public sendProducts: () ==> ()
@@ -65,5 +61,5 @@ operations
 				removeProductStock(product,getStock(product));
 			);
 		);
-	);
+	)pre exists p in set dom stocks.products & stocks.products(p) > 0;
 end Producer

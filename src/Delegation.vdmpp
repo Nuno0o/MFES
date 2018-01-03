@@ -101,7 +101,7 @@ functions
 	highestNaux(P,N,L) == if(N = 0 or P = { |-> }) then L else let c = highest(P) in highestNaux({c} <-: P, N-1, L^[c]);
 	
 	public highest: map Products`Type to Products`Stock -> Products`Type
-	highest(P) == highestaux(P,"",-1)
+	highest(P) == highestaux(P,"None",-1)
 	pre card dom P > 0;
 	
 	public highestaux: map Products`Type to Products`Stock * Products`Type * real -> Products`Type
