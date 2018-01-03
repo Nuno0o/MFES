@@ -192,6 +192,84 @@ public class Interface {
 			  + "\nOption: ");
 	}
 	
+	private static void producerRegister() {
+		System.out.println("To cancel write 'exit'.");
+		System.out.print("Name: ");
+		Scanner in = new Scanner(System.in);
+		String name = in.nextLine();
+		if(name == "exit") {
+			state = PRODUCER;
+			return;
+		}
+		frutaFeia.newProducer(name);
+		System.out.println("Producer created");
+		state = PRODUCER;
+	}
+	
+	private static void producerSeeAll() {
+		Iterator it = frutaFeia.getProducers().iterator();
+		while(it.hasNext()) {
+			Producer obj = (Producer) it.next();
+			System.out.println("name = " + obj.name);
+		}
+		System.out.print("Write '0' to go back.\nOption: ");
+		Scanner in = new Scanner(System.in);
+		int option = in.nextInt();
+		while(option != 0) {
+			System.out.print("Write '0' to go back.\nOption: ");
+			option = in.nextInt();
+		}
+		state = PRODUCER;
+	}
+	
+	private static void producerMakeProduct() {
+		System.out.print("Producer name: ");
+		Scanner in = new Scanner(System.in);
+		String name = in.nextLine();
+		System.out.print("Product name: ");
+		String pName = in.nextLine();
+		frutaFeia.addProductPro(name, pName);
+		frutaFeia.addProductStockPro(name, pName, 2L);
+		System.out.print("Write '0' to go back.\nOption: ");
+		int option = in.nextInt();
+		while(option != 0) {
+			System.out.print("Write '0' to go back.\nOption: ");
+			option = in.nextInt();
+		}
+		state = PRODUCER;
+	}
+	
+	private static void producerSend() {
+		System.out.print("Producer name: ");
+		Scanner in = new Scanner(System.in);
+		String name = in.nextLine();
+		frutaFeia.sendToDels(name);
+		System.out.print("Write '0' to go back.\nOption: ");
+		int option = in.nextInt();
+		while(option != 0) {
+			System.out.print("Write '0' to go back.\nOption: ");
+			option = in.nextInt();
+		}
+		state = PRODUCER;
+	}
+	
+	private static void producerViewProducts() {
+		//TODO
+		Iterator it = frutaFeia.getProducers().iterator();
+		while(it.hasNext()) {
+			Producer obj = (Producer) it.next();
+			System.out.println("name = " + obj.name);
+		}
+		System.out.print("Write '0' to go back.\nOption: ");
+		Scanner in = new Scanner(System.in);
+		int option = in.nextInt();
+		while(option != 0) {
+			System.out.print("Write '0' to go back.\nOption: ");
+			option = in.nextInt();
+		}
+		state = PRODUCER;
+	}
+	
 	private static void delegationMenu() {
 		System.out.println(
 				"*******************************\n"
