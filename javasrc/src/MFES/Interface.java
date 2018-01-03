@@ -524,7 +524,7 @@ public class Interface {
 				return true;
 			}
 		}
-		System.out.println("Invalid Option!\n\nOption: ");
+		System.out.println("Invalid Option! \n\nOption: ");
 		return false;
 	}
 }
