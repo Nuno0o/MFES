@@ -1,0 +1,111 @@
+class Delegation
+types
+	public Name = seq of char inv n == len n > 0;
+instance variables
+	public name: Name;
+	public stocks : Products;
+	public customers : set of Consumer;
+	public baskets : map Consumer to Basket;
+	--Baskets can only be sent to customers
+	inv dom baskets subset customers;
+	--Number of baskets is equal or less than number of customers
+	inv card dom baskets <= card customers;
+	--A basket can't be in the hands of the customer and in the delegation at the same time
+	inv forall c in set customers & elems c.baskets inter rng baskets = {};
+operations
+	public Delegation: Name ==> Delegation
+	Delegation(N) == (name := N;stocks := new Products();customers := {};baskets := { |-> };return self);
+	--Add customer
+	public addCustomer: Consumer ==> ()
+	addCustomer(C) == (customers := customers union {C};C.setDelegation(self))
+	pre C not in set customers
+	post C in set customers;
+	--Remove customer
+	public removeCustomer: Consumer ==> ()
+	removeCustomer(C) == (customers := customers \ {C})
+	pre C in set customers
+	post C not in set customers;
+	--Add a product
+	public addProduct: Products`Type ==> ()
+	addProduct(P) == (stocks.addProduct(P););
+	--Remove a product
+	public removeProduct: Products`Type ==> ()
+	removeProduct(P) == (stocks.removeProduct(P));
+	--Get product list
+	public getProducts: () ==> set of Products`Type
+	getProducts() == (return stocks.getProducts());
+	--Add stock to a product
+	public addProductStock: Products`Type * real ==> ()
+	addProductStock(P,S) == (stocks.addProductStock(P,S));
+	--Remove stock from a product
+	public removeProductStock: Products`Type * real ==> ()
+	removeProductStock(P,S) == (stocks.removeProductStock(P,S));
+	--Get stock of a product
+	public getStock: Products`Type ==> real
+	getStock(P) == (return stocks.getStock(P));
+	--Make a new empty basket for a certain customer(requires that a basket does not already exist for this customer)
+	public makeBasket: Consumer ==> ()
+	makeBasket(C) == (
+		dcl b : Basket := new Basket(C.getBasketMaxSize()); 
+		baskets := baskets munion {C |-> b}
+	)
+	pre C in set customers and C not in set dom baskets
+	post C in set dom baskets;
+	--Make baskets for every customer
+	public makeBaskets: () ==> ()
+	makeBaskets() == (
+		for all customer in set customers do
+			makeBasket(customer)
+	);
+	--Fill the basket of a customer with the (3 or 4) highest stock products in the company, being proportionally distributed
+	public fillBasket: Consumer ==> ()
+	fillBasket(C) == (
+		dcl products : seq of Products`Type := highestN(stocks.products,Basket`maxNProducts(baskets(C).maxWeight));
+		dcl sum : real := 0;
+		for p in products do(
+			sum := sum + stocks.getStock(p);
+		);
+		for p in products do(
+			baskets(C).addProduct(p);
+			removeProductStock(p,stocks.getStock(p)*baskets(C).getMaxWeight()/sum);
+			baskets(C).addProductStock(p,stocks.getStock(p)*baskets(C).getMaxWeight()/sum);
+		);
+	)
+	pre C in set dom baskets and card dom baskets(C).stocks.products = 0 and card dom stocks.products > 0--No products are in the basket initially
+	post card dom baskets(C).stocks.products > 0;
+	--Fill baskets
+	public fillBaskets: () ==> ()
+	fillBaskets() == (
+		for all c in set customers do
+			fillBasket(c);
+	);
+	--Give basket to consumer and remove it from delegation
+	public giveBasket:Consumer ==> ()
+	giveBasket(C) == (
+		dcl B: Basket;
+		B := baskets(C);
+		baskets := {C} <-: baskets;
+		C.addBasket(B);
+	)
+	pre C in set dom baskets;
+	--Cancel basket from consumer(just remove from delegation)
+	public cancelBasket:Consumer ==> ()
+	cancelBasket(C) == (
+		baskets := {C} <-: baskets;
+	)
+	pre C in set dom baskets;
+functions
+	--Returns the N products with highest stock with ascending order
+	public highestN: map Products`Type to Products`Stock * nat -> seq of Products`Type
+	highestN(P,N) == (highestNaux(P,N,[]));
+	
+	public highestNaux: map Products`Type to Products`Stock * nat * seq of Products`Type -> seq of Products`Type
+	highestNaux(P,N,L) == if(N = 0 or P = { |-> }) then L else let c = highest(P) in highestNaux({c} <-: P, N-1, L^[c]);
+	
+	public highest: map Products`Type to Products`Stock -> Products`Type
+	highest(P) == highestaux(P,"None",-1)
+	pre card dom P > 0;
+	
+	public highestaux: map Products`Type to Products`Stock * Products`Type * real -> Products`Type
+	highestaux(P,Biggest,Max) == if(P = { |-> }) then Biggest else (let p in set dom P in if(P(p) > Max) then highestaux({p} <-: P,p,P(p)) else highestaux({p} <-: P,Biggest,Max));
+end Delegation

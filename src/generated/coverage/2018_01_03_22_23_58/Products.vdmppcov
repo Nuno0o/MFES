@@ -1,0 +1,36 @@
+class Products
+types
+	public static Type = seq of char inv t == len t > 0;
+	public static Stock = real inv s == s >= 0;
+instance variables
+	public products : map Type to Stock;
+operations
+	public Products: () ==> Products
+	Products() == (products := { |-> };return self);
+	--Add a product
+	public addProduct: Type ==> ()
+	addProduct(P) == (products := products munion {P |-> 0};)
+	pre P not in set(dom products)
+	post P in set(dom products) and products(P) = 0;
+	--Remove a product
+	public removeProduct: Type ==> ()
+	removeProduct(P) == (products := {P} <-: products)
+	pre P in set(dom products) 
+	post P not in set(dom products);
+	--Get product list
+	public getProducts: () ==> set of Type
+	getProducts() == (return dom products);
+	--Add stock to a product
+	public addProductStock: Type * real ==> ()
+	addProductStock(P,S) == (products := products ++ {P |-> products(P) + S})
+	pre P in set(dom products) and S >= 0
+	post products(P) >= S;
+	--Remove stock from a product
+	public removeProductStock: Type * real ==> ()
+	removeProductStock(P,S) == (products := products ++ {P |-> products(P) - S})
+	pre P in set(dom products) and S >= 0 and S <= products(P);
+	--Get stock of a product
+	public getStock: Type ==> real
+	getStock(P) == (return products(P))
+	pre P in set(dom products);
+end Products

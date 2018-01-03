@@ -1,0 +1,137 @@
+class FrutaFeia
+instance variables
+	public delegations : seq of Delegation;
+	public producers : seq of Producer;
+	public consumers : seq of Consumer;
+	inv forall d in seq delegations & d.customers subset elems consumers;
+	inv forall p in seq producers & p.delegations subset elems delegations;
+operations
+	--List delegations
+	public getDelegations : () ==> seq of Delegation
+	getDelegations() == (return delegations);
+	--List producers
+	public getProducers : () ==> seq of Producer
+	getProducers() == (return producers);
+	--List delegations
+	public getConsumers : () ==> seq of Consumer
+	getConsumers() == (return consumers);
+	--List of delegations of a producer
+	public getDelPro: Producer`Name ==> set of Delegation
+	getDelPro(PN) == (
+		return getProByName(producers,PN).getDelegations()
+	);
+	--N baskets a customer has received
+	public getNBaskets: Consumer`Name ==> nat
+	getNBaskets(CN) == (
+		return len getConByName(consumers,CN).getBaskets()
+	);
+	--Get last basket
+	public getLastBasket: Consumer`Name ==> Basket
+	getLastBasket(CN) == (
+		return hd getConByName(consumers,CN).getBaskets()
+	);
+	--Constructor
+	public FrutaFeia : () ==> FrutaFeia
+	FrutaFeia() == (delegations := [];producers := [];consumers := []; return self;);
+	--new Client
+	public newCustomer : Consumer`Name * Basket`MaxWeight ==> ()
+	newCustomer(N,M) == (
+		dcl customer : Consumer := new Consumer(N,M);
+		consumers := [customer] ^ consumers;
+	)
+	pre forall c in seq consumers & c.name <> N
+	post exists c in seq consumers & c.name = N;
+	
+	--new Delegation
+	public newDelegation: Delegation`Name ==> ()
+	newDelegation(N) == (
+		dcl delegation : Delegation := new Delegation(N);
+		delegations := [delegation] ^delegations;
+	)
+	pre forall d in seq delegations & d.name <> N
+	post exists d in seq delegations & d.name = N;
+	
+	--add Customer to delegation
+	public addCustomer: Delegation`Name * Consumer`Name ==> ()
+	addCustomer(DN,CN) == (
+		getDelByName(delegations,+DN).addCustomer(getConByName(consumers,CN));
+	);
+	--remove Customer from delegation
+	public removeCustomer: Delegation`Name * Consumer`Name ==> ()
+	removeCustomer(DN,CN) == (
+		getDelByName(delegations,DN).removeCustomer(getConByName(consumers,CN));
+	);
+	--add Product type to delegation
+	public addProductDel: Delegation`Name * Products`Type ==> ()
+	addProductDel(DN,PT) == (
+		getDelByName(delegations,DN).addProduct(PT);
+	);
+	--remove Product type from delegation
+	public removeProductDel: Delegation`Name * Products`Type ==> ()
+	removeProductDel(DN,PT) == (
+		getDelByName(delegations,DN).removeProduct(PT);
+	);
+	--make baskets all fill them
+	public makeAndFillBaskets : Delegation`Name ==> ()
+	makeAndFillBaskets(DN) == (
+		getDelByName(delegations,DN).makeBaskets();
+		getDelByName(delegations,DN).fillBaskets();
+	);
+	--New producer
+	public newProducer : Producer`Name ==> ()
+	newProducer(N) == (
+		dcl producer : Producer := new Producer(N);
+		producers := [producer] ^ producers;
+	);
+	--add Product type to producer
+	public addProductPro: Delegation`Name * Products`Type ==> ()
+	addProductPro(PN,PT) == (
+		getProByName(producers,PN).addProduct(PT);
+	);
+	--remove Product type from producer
+	public removeProductPro: Delegation`Name * Products`Type ==> ()
+	removeProductPro(PN,PT) == (
+		getProByName(producers,PN).removeProduct(PT);
+	);
+	--add Product type to producer
+	public addProductStockPro: Delegation`Name * Products`Type * Products`Stock ==> ()
+	addProductStockPro(PN,PT,Q) == (
+		getProByName(producers,PN).addProductStock(PT,Q);
+	);
+	--remove Product type from producer
+	public removeProductStockPro: Delegation`Name * Products`Type * Products`Stock ==> ()
+	removeProductStockPro(PN,PT,Q) == (
+		getProByName(producers,PN).removeProductStock(PT,Q);
+	);
+	--add delegation to producer
+	public addDelToPro : Producer`Name * Delegation`Name ==> ()
+	addDelToPro(PN,DN) == (
+		getProByName(producers,PN).addDelegation(getDelByName(delegations,DN));
+	);
+	--remove delegation from producer
+	public removeDelFromPro : Producer`Name * Delegation`Name ==> ()
+	removeDelFromPro(PN,DN) == (
+		getProByName(producers,PN).removeDelegation(getDelByName(delegations,DN));
+	);
+	--send prods from producer to delegations
+	public sendToDels : Producer`Name ==> ()
+	sendToDels(PN) == (getProByName(producers,PN).sendProducts());
+	--fetch basket
+	public fetchBasket : Consumer`Name ==> ()
+	fetchBasket(CN) == (getConByName(consumers,CN).fetchBasket());
+	--cancel basket
+	public cancelBasket : Consumer`Name ==> ()
+	cancelBasket(CN) == (getConByName(consumers,CN).cancelBasket());
+functions
+	public getDelByName: seq of Delegation * Delegation`Name -> [Delegation]
+	getDelByName(D,N)==(if D = [] then nil else if (hd D).name = N then (hd D) else getDelByName(tl D, N))
+	pre exists d in seq D & d.name = N;
+	
+	public getConByName: seq of Consumer * Consumer`Name -> [Consumer]
+	getConByName(C,N)==(if C = [] then nil else if (hd C).name = N then (hd C) else getConByName(tl C, N))
+	pre exists c in seq C & c.name = N;
+	
+	public getProByName: seq of Producer * Producer`Name -> [Producer]
+	getProByName(P,N)==(if P = [] then nil else if (hd P).name = N then (hd P) else getProByName(tl P, N))
+	pre exists p in seq P & p.name = N;
+end FrutaFeia
