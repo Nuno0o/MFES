@@ -1,0 +1,22 @@
+<?xml version="1.0" ?>
+<!--GENERATED FILE, PLEASE DO NOT EDIT!!!--><EXT object="D" version="3">
+  <DEPS>
+    <ID name="D" mc="Class" uid="453d8789-7a70-413b-8acc-ec6ca388da53"/>
+  </DEPS>
+  <OBJECT>
+    <ID name="D" mc="Class" uid="453d8789-7a70-413b-8acc-ec6ca388da53"/>
+    <PID name="Map&lt;D,R&gt;" mc="Class" uid="02bff855-a61b-48c2-a8ed-e0a7085fd819"/>
+    <ATTRIBUTES>
+      <ATT name="IsActive">false</ATT>
+      <ATT name="IsMain">false</ATT>
+      <ATT name="IsElementary">false</ATT>
+      <ATT name="IsAbstract">false</ATT>
+      <ATT name="IsLeaf">false</ATT>
+      <ATT name="IsRoot">false</ATT>
+      <ATT name="Visibility">Public</ATT>
+      <ATT name="Name"><![CDATA[D]]></ATT>
+      <ATT name="status">1970354901745664</ATT>
+    </ATTRIBUTES>
+    <DEPENDENCIES></DEPENDENCIES>
+  </OBJECT>
+</EXT>

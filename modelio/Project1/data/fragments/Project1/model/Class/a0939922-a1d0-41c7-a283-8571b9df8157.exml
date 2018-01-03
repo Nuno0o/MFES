@@ -1,0 +1,59 @@
+<?xml version="1.0" ?>
+<!--GENERATED FILE, PLEASE DO NOT EDIT!!!--><EXT object="Seq&lt;Basket&gt;" version="3">
+  <DEPS>
+    <ID name="Seq&lt;Basket&gt;" mc="Class" uid="a0939922-a1d0-41c7-a283-8571b9df8157"/>
+    <EXTID name="Basket" mc="Class" uid="c4a26f49-4656-479b-83e0-6f7253538816"/>
+    <EXTID name="Seq&lt;T&gt;" mc="Class" uid="92e57126-ee91-44d5-852b-8978efe0fcd3"/>
+  </DEPS>
+  <OBJECT>
+    <ID name="Seq&lt;Basket&gt;" mc="Class" uid="a0939922-a1d0-41c7-a283-8571b9df8157"/>
+    <PID name="Binding classes" mc="Package" uid="2bb2fa31-f28b-498e-852e-5cd756bb3781"/>
+    <ATTRIBUTES>
+      <ATT name="IsActive">false</ATT>
+      <ATT name="IsMain">false</ATT>
+      <ATT name="IsElementary">false</ATT>
+      <ATT name="IsAbstract">false</ATT>
+      <ATT name="IsLeaf">false</ATT>
+      <ATT name="IsRoot">false</ATT>
+      <ATT name="Visibility">Public</ATT>
+      <ATT name="Name"><![CDATA[Seq<Basket>]]></ATT>
+      <ATT name="status">1970354901745664</ATT>
+    </ATTRIBUTES>
+    <DEPENDENCIES>
+      <COMP relation="TemplateInstanciation">
+        <OBJECT>
+          <ID name="" mc="TemplateBinding" uid="57eca678-137f-4a4c-a4a2-dd955f4e5c4f"/>
+          <PID name="Seq&lt;Basket&gt;" mc="Class" uid="a0939922-a1d0-41c7-a283-8571b9df8157"/>
+          <ATTRIBUTES>
+            <ATT name="Name"></ATT>
+            <ATT name="status">1970354901745664</ATT>
+          </ATTRIBUTES>
+          <DEPENDENCIES>
+            <COMP relation="ParameterSubstitution">
+              <OBJECT>
+                <ID name="" mc="TemplateParameterSubstitution" uid="794fca2d-0d26-496a-9727-173a58accf19"/>
+                <PID name="Seq&lt;Basket&gt;" mc="Class" uid="a0939922-a1d0-41c7-a283-8571b9df8157"/>
+                <ATTRIBUTES>
+                  <ATT name="Value"></ATT>
+                  <ATT name="Name"></ATT>
+                  <ATT name="status">1970354901745664</ATT>
+                </ATTRIBUTES>
+                <DEPENDENCIES>
+                  <LINK relation="Actual">
+                    <ID name="Basket" mc="Class" uid="c4a26f49-4656-479b-83e0-6f7253538816"/>
+                  </LINK>
+                  <LINK relation="FormalParameter">
+                    <REFOBJ>
+                      <ID name="" mc="TemplateParameter" uid="0f2f3742-102d-4d74-8353-211727d113b9"/>
+                      <PID name="Seq&lt;T&gt;" mc="Class" uid="92e57126-ee91-44d5-852b-8978efe0fcd3"/>
+                    </REFOBJ>
+                  </LINK>
+                </DEPENDENCIES>
+              </OBJECT>
+            </COMP>
+          </DEPENDENCIES>
+        </OBJECT>
+      </COMP>
+    </DEPENDENCIES>
+  </OBJECT>
+</EXT>

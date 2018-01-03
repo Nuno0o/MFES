@@ -1,0 +1,80 @@
+<?xml version="1.0" ?>
+<!--GENERATED FILE, PLEASE DO NOT EDIT!!!--><EXT object="Map&lt;Products::Type,Products::Stock&gt;" version="3">
+  <DEPS>
+    <ID name="Map&lt;Products::Type,Products::Stock&gt;" mc="Class" uid="5d11545d-1e4b-4065-8dd9-88bdb2533dec"/>
+    <EXTID name="Map&lt;D,R&gt;" mc="Class" uid="02bff855-a61b-48c2-a8ed-e0a7085fd819"/>
+    <EXTID name="Stock" mc="Class" uid="a0232bb4-9689-423a-b26a-4f890183e0af"/>
+    <EXTID name="Type" mc="Class" uid="4870ed22-e5be-4680-a473-2dcba36a63f1"/>
+  </DEPS>
+  <OBJECT>
+    <ID name="Map&lt;Products::Type,Products::Stock&gt;" mc="Class" uid="5d11545d-1e4b-4065-8dd9-88bdb2533dec"/>
+    <PID name="Binding classes" mc="Package" uid="2bb2fa31-f28b-498e-852e-5cd756bb3781"/>
+    <ATTRIBUTES>
+      <ATT name="IsActive">false</ATT>
+      <ATT name="IsMain">false</ATT>
+      <ATT name="IsElementary">false</ATT>
+      <ATT name="IsAbstract">false</ATT>
+      <ATT name="IsLeaf">false</ATT>
+      <ATT name="IsRoot">false</ATT>
+      <ATT name="Visibility">Public</ATT>
+      <ATT name="Name"><![CDATA[Map<Products::Type,Products::Stock>]]></ATT>
+      <ATT name="status">1970354901745664</ATT>
+    </ATTRIBUTES>
+    <DEPENDENCIES>
+      <COMP relation="TemplateInstanciation">
+        <OBJECT>
+          <ID name="" mc="TemplateBinding" uid="984b4cab-579f-4709-815e-5957584f19ef"/>
+          <PID name="Map&lt;Products::Type,Products::Stock&gt;" mc="Class" uid="5d11545d-1e4b-4065-8dd9-88bdb2533dec"/>
+          <ATTRIBUTES>
+            <ATT name="Name"></ATT>
+            <ATT name="status">1970354901745664</ATT>
+          </ATTRIBUTES>
+          <DEPENDENCIES>
+            <COMP relation="ParameterSubstitution">
+              <OBJECT>
+                <ID name="" mc="TemplateParameterSubstitution" uid="4fe650f9-2106-45c2-a069-3f169945e3aa"/>
+                <PID name="Map&lt;Products::Type,Products::Stock&gt;" mc="Class" uid="5d11545d-1e4b-4065-8dd9-88bdb2533dec"/>
+                <ATTRIBUTES>
+                  <ATT name="Value"></ATT>
+                  <ATT name="Name"></ATT>
+                  <ATT name="status">1970354901745664</ATT>
+                </ATTRIBUTES>
+                <DEPENDENCIES>
+                  <LINK relation="Actual">
+                    <ID name="Type" mc="Class" uid="4870ed22-e5be-4680-a473-2dcba36a63f1"/>
+                  </LINK>
+                  <LINK relation="FormalParameter">
+                    <REFOBJ>
+                      <ID name="" mc="TemplateParameter" uid="4646512c-3ed4-4194-b8d9-62c5316cba51"/>
+                      <PID name="Map&lt;D,R&gt;" mc="Class" uid="02bff855-a61b-48c2-a8ed-e0a7085fd819"/>
+                    </REFOBJ>
+                  </LINK>
+                </DEPENDENCIES>
+              </OBJECT>
+              <OBJECT>
+                <ID name="" mc="TemplateParameterSubstitution" uid="a9d4dee9-4c9c-4356-9987-35843bd09f26"/>
+                <PID name="Map&lt;Products::Type,Products::Stock&gt;" mc="Class" uid="5d11545d-1e4b-4065-8dd9-88bdb2533dec"/>
+                <ATTRIBUTES>
+                  <ATT name="Value"></ATT>
+                  <ATT name="Name"></ATT>
+                  <ATT name="status">1970354901745664</ATT>
+                </ATTRIBUTES>
+                <DEPENDENCIES>
+                  <LINK relation="Actual">
+                    <ID name="Stock" mc="Class" uid="a0232bb4-9689-423a-b26a-4f890183e0af"/>
+                  </LINK>
+                  <LINK relation="FormalParameter">
+                    <REFOBJ>
+                      <ID name="" mc="TemplateParameter" uid="f7b196e4-5c6c-47c2-820f-1e35559ade63"/>
+                      <PID name="Map&lt;D,R&gt;" mc="Class" uid="02bff855-a61b-48c2-a8ed-e0a7085fd819"/>
+                    </REFOBJ>
+                  </LINK>
+                </DEPENDENCIES>
+              </OBJECT>
+            </COMP>
+          </DEPENDENCIES>
+        </OBJECT>
+      </COMP>
+    </DEPENDENCIES>
+  </OBJECT>
+</EXT>

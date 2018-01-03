@@ -1,0 +1,80 @@
+<?xml version="1.0" ?>
+<!--GENERATED FILE, PLEASE DO NOT EDIT!!!--><EXT object="Map&lt;Consumer,Basket&gt;" version="3">
+  <DEPS>
+    <ID name="Map&lt;Consumer,Basket&gt;" mc="Class" uid="a4301ffc-b668-451d-b3d7-22f7e9a70dc3"/>
+    <EXTID name="Basket" mc="Class" uid="c4a26f49-4656-479b-83e0-6f7253538816"/>
+    <EXTID name="Consumer" mc="Class" uid="407ccff4-dad1-47f5-8629-423605394baa"/>
+    <EXTID name="Map&lt;D,R&gt;" mc="Class" uid="02bff855-a61b-48c2-a8ed-e0a7085fd819"/>
+  </DEPS>
+  <OBJECT>
+    <ID name="Map&lt;Consumer,Basket&gt;" mc="Class" uid="a4301ffc-b668-451d-b3d7-22f7e9a70dc3"/>
+    <PID name="Binding classes" mc="Package" uid="2bb2fa31-f28b-498e-852e-5cd756bb3781"/>
+    <ATTRIBUTES>
+      <ATT name="IsActive">false</ATT>
+      <ATT name="IsMain">false</ATT>
+      <ATT name="IsElementary">false</ATT>
+      <ATT name="IsAbstract">false</ATT>
+      <ATT name="IsLeaf">false</ATT>
+      <ATT name="IsRoot">false</ATT>
+      <ATT name="Visibility">Public</ATT>
+      <ATT name="Name"><![CDATA[Map<Consumer,Basket>]]></ATT>
+      <ATT name="status">1970354901745664</ATT>
+    </ATTRIBUTES>
+    <DEPENDENCIES>
+      <COMP relation="TemplateInstanciation">
+        <OBJECT>
+          <ID name="" mc="TemplateBinding" uid="cd46d06d-1f01-4178-b4c6-ab4e478da49e"/>
+          <PID name="Map&lt;Consumer,Basket&gt;" mc="Class" uid="a4301ffc-b668-451d-b3d7-22f7e9a70dc3"/>
+          <ATTRIBUTES>
+            <ATT name="Name"></ATT>
+            <ATT name="status">1970354901745664</ATT>
+          </ATTRIBUTES>
+          <DEPENDENCIES>
+            <COMP relation="ParameterSubstitution">
+              <OBJECT>
+                <ID name="" mc="TemplateParameterSubstitution" uid="ac7df399-d6aa-4169-b734-6361ce9c7d02"/>
+                <PID name="Map&lt;Consumer,Basket&gt;" mc="Class" uid="a4301ffc-b668-451d-b3d7-22f7e9a70dc3"/>
+                <ATTRIBUTES>
+                  <ATT name="Value"></ATT>
+                  <ATT name="Name"></ATT>
+                  <ATT name="status">1970354901745664</ATT>
+                </ATTRIBUTES>
+                <DEPENDENCIES>
+                  <LINK relation="Actual">
+                    <ID name="Consumer" mc="Class" uid="407ccff4-dad1-47f5-8629-423605394baa"/>
+                  </LINK>
+                  <LINK relation="FormalParameter">
+                    <REFOBJ>
+                      <ID name="" mc="TemplateParameter" uid="4646512c-3ed4-4194-b8d9-62c5316cba51"/>
+                      <PID name="Map&lt;D,R&gt;" mc="Class" uid="02bff855-a61b-48c2-a8ed-e0a7085fd819"/>
+                    </REFOBJ>
+                  </LINK>
+                </DEPENDENCIES>
+              </OBJECT>
+              <OBJECT>
+                <ID name="" mc="TemplateParameterSubstitution" uid="b5b15145-bece-4ce0-b8f9-3506078f90fd"/>
+                <PID name="Map&lt;Consumer,Basket&gt;" mc="Class" uid="a4301ffc-b668-451d-b3d7-22f7e9a70dc3"/>
+                <ATTRIBUTES>
+                  <ATT name="Value"></ATT>
+                  <ATT name="Name"></ATT>
+                  <ATT name="status">1970354901745664</ATT>
+                </ATTRIBUTES>
+                <DEPENDENCIES>
+                  <LINK relation="Actual">
+                    <ID name="Basket" mc="Class" uid="c4a26f49-4656-479b-83e0-6f7253538816"/>
+                  </LINK>
+                  <LINK relation="FormalParameter">
+                    <REFOBJ>
+                      <ID name="" mc="TemplateParameter" uid="f7b196e4-5c6c-47c2-820f-1e35559ade63"/>
+                      <PID name="Map&lt;D,R&gt;" mc="Class" uid="02bff855-a61b-48c2-a8ed-e0a7085fd819"/>
+                    </REFOBJ>
+                  </LINK>
+                </DEPENDENCIES>
+              </OBJECT>
+            </COMP>
+          </DEPENDENCIES>
+        </OBJECT>
+      </COMP>
+    </DEPENDENCIES>
+  </OBJECT>
+</EXT>

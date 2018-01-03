@@ -1,0 +1,43 @@
+<?xml version="1.0" ?>
+<!--GENERATED FILE, PLEASE DO NOT EDIT!!!--><EXT object="MaxWeight" version="3">
+  <DEPS>
+    <ID name="MaxWeight" mc="Class" uid="d748c0dc-4840-4a35-81c1-1565a2e19ee9"/>
+    <EXTID name="Basket" mc="Class" uid="c4a26f49-4656-479b-83e0-6f7253538816"/>
+  </DEPS>
+  <OBJECT>
+    <ID name="MaxWeight" mc="Class" uid="d748c0dc-4840-4a35-81c1-1565a2e19ee9"/>
+    <PID name="Basket" mc="Class" uid="c4a26f49-4656-479b-83e0-6f7253538816"/>
+    <ATTRIBUTES>
+      <ATT name="IsActive">false</ATT>
+      <ATT name="IsMain">false</ATT>
+      <ATT name="IsElementary">false</ATT>
+      <ATT name="IsAbstract">false</ATT>
+      <ATT name="IsLeaf">false</ATT>
+      <ATT name="IsRoot">false</ATT>
+      <ATT name="Visibility">Public</ATT>
+      <ATT name="Name"><![CDATA[MaxWeight]]></ATT>
+      <ATT name="status">1970354901745664</ATT>
+    </ATTRIBUTES>
+    <DEPENDENCIES>
+      <COMP relation="Parent">
+        <OBJECT>
+          <ID name="" mc="Generalization" uid="ee1ff0e8-eb49-4fa0-9f00-3ab397efc65c"/>
+          <PID name="MaxWeight" mc="Class" uid="d748c0dc-4840-4a35-81c1-1565a2e19ee9"/>
+          <ATTRIBUTES>
+            <ATT name="Discriminator"></ATT>
+            <ATT name="Name"></ATT>
+            <ATT name="status">1970354901745664</ATT>
+          </ATTRIBUTES>
+          <DEPENDENCIES>
+            <LINK relation="SuperType">
+              <REFOBJ>
+                <ID name="MaxWeight_GrandePequena_360987009" mc="Enumeration" uid="6d1a9b41-775a-42ed-a500-13e9dc4c5e32"/>
+                <PID name="Basket" mc="Class" uid="c4a26f49-4656-479b-83e0-6f7253538816"/>
+              </REFOBJ>
+            </LINK>
+          </DEPENDENCIES>
+        </OBJECT>
+      </COMP>
+    </DEPENDENCIES>
+  </OBJECT>
+</EXT>

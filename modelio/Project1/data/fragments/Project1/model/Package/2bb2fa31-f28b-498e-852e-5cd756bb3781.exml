@@ -1,0 +1,59 @@
+<?xml version="1.0" ?>
+<!--GENERATED FILE, PLEASE DO NOT EDIT!!!--><EXT object="Binding classes" version="3">
+  <DEPS>
+    <ID name="Binding classes" mc="Package" uid="2bb2fa31-f28b-498e-852e-5cd756bb3781"/>
+    <COMPID name="Map&lt;Consumer,Basket&gt;" mc="Class" uid="a4301ffc-b668-451d-b3d7-22f7e9a70dc3"/>
+    <COMPID name="Map&lt;Products::Type,Products::Stock&gt;" mc="Class" uid="5d11545d-1e4b-4065-8dd9-88bdb2533dec"/>
+    <COMPID name="Optional&lt;Consumer&gt;" mc="Class" uid="28a3054a-49e4-4c26-813e-1f89885c406a"/>
+    <COMPID name="Optional&lt;Delegation&gt;" mc="Class" uid="a4295d17-a056-4d45-8331-8eb75d803d1c"/>
+    <COMPID name="Optional&lt;IO::filedirective&gt;" mc="Class" uid="3d0767f7-e742-48ac-b5de-94f479fcba5e"/>
+    <COMPID name="Optional&lt;Producer&gt;" mc="Class" uid="ff62c9f2-8f91-4f92-898b-597aa656992b"/>
+    <COMPID name="Optional&lt;p&gt;" mc="Class" uid="fc2bb7b8-6eba-48ea-be0b-58baf6936429"/>
+    <COMPID name="Product&lt;bool,Optional&lt;p&gt;&gt;" mc="Class" uid="ffdbff96-a7b4-46f1-af94-2641065bb81a"/>
+    <COMPID name="Seq&lt;Any&gt;" mc="Class" uid="fbd20e68-201c-4170-b0df-f946b97d212d"/>
+    <COMPID name="Seq&lt;Basket&gt;" mc="Class" uid="a0939922-a1d0-41c7-a283-8571b9df8157"/>
+    <COMPID name="Seq&lt;Consumer&gt;" mc="Class" uid="967241e6-0dc5-4400-b18c-d22cafa01054"/>
+    <COMPID name="Seq&lt;Delegation&gt;" mc="Class" uid="4b267add-da69-4955-a1ff-a601b3876e3e"/>
+    <COMPID name="Seq&lt;Producer&gt;" mc="Class" uid="b40601f2-4a33-49ce-aecb-91652d646bd5"/>
+    <COMPID name="Seq&lt;Products::Type&gt;" mc="Class" uid="164e62bd-b853-47ec-bd60-bdb27b676f0d"/>
+    <COMPID name="Seq&lt;char&gt;" mc="Class" uid="efd77577-047c-44c8-a989-b1d3fe7e90f1"/>
+    <COMPID name="Set&lt;Consumer&gt;" mc="Class" uid="f3b8b015-f722-4962-9e92-23501f13ecbf"/>
+    <COMPID name="Set&lt;Delegation&gt;" mc="Class" uid="46b69519-d5d9-442e-b9d5-78344f3d302a"/>
+    <COMPID name="Set&lt;Products::Type&gt;" mc="Class" uid="fa7951a6-b822-4897-b840-147a47ed6937"/>
+  </DEPS>
+  <OBJECT>
+    <ID name="Binding classes" mc="Package" uid="2bb2fa31-f28b-498e-852e-5cd756bb3781"/>
+    <PID name="project1" mc="Package" uid="488bbb55-d27f-4af5-bda3-3caa7d43f16b"/>
+    <ATTRIBUTES>
+      <ATT name="IsInstantiable">false</ATT>
+      <ATT name="IsAbstract">false</ATT>
+      <ATT name="IsLeaf">false</ATT>
+      <ATT name="IsRoot">false</ATT>
+      <ATT name="Visibility">Public</ATT>
+      <ATT name="Name"><![CDATA[Binding classes]]></ATT>
+      <ATT name="status">1970354901745664</ATT>
+    </ATTRIBUTES>
+    <DEPENDENCIES>
+      <COMP relation="OwnedElement">
+        <COMPID name="Seq&lt;char&gt;" mc="Class" uid="efd77577-047c-44c8-a989-b1d3fe7e90f1"/>
+        <COMPID name="Set&lt;Products::Type&gt;" mc="Class" uid="fa7951a6-b822-4897-b840-147a47ed6937"/>
+        <COMPID name="Map&lt;Products::Type,Products::Stock&gt;" mc="Class" uid="5d11545d-1e4b-4065-8dd9-88bdb2533dec"/>
+        <COMPID name="Seq&lt;Basket&gt;" mc="Class" uid="a0939922-a1d0-41c7-a283-8571b9df8157"/>
+        <COMPID name="Optional&lt;Delegation&gt;" mc="Class" uid="a4295d17-a056-4d45-8331-8eb75d803d1c"/>
+        <COMPID name="Set&lt;Consumer&gt;" mc="Class" uid="f3b8b015-f722-4962-9e92-23501f13ecbf"/>
+        <COMPID name="Map&lt;Consumer,Basket&gt;" mc="Class" uid="a4301ffc-b668-451d-b3d7-22f7e9a70dc3"/>
+        <COMPID name="Seq&lt;Products::Type&gt;" mc="Class" uid="164e62bd-b853-47ec-bd60-bdb27b676f0d"/>
+        <COMPID name="Seq&lt;Delegation&gt;" mc="Class" uid="4b267add-da69-4955-a1ff-a601b3876e3e"/>
+        <COMPID name="Seq&lt;Producer&gt;" mc="Class" uid="b40601f2-4a33-49ce-aecb-91652d646bd5"/>
+        <COMPID name="Seq&lt;Consumer&gt;" mc="Class" uid="967241e6-0dc5-4400-b18c-d22cafa01054"/>
+        <COMPID name="Set&lt;Delegation&gt;" mc="Class" uid="46b69519-d5d9-442e-b9d5-78344f3d302a"/>
+        <COMPID name="Optional&lt;Consumer&gt;" mc="Class" uid="28a3054a-49e4-4c26-813e-1f89885c406a"/>
+        <COMPID name="Optional&lt;Producer&gt;" mc="Class" uid="ff62c9f2-8f91-4f92-898b-597aa656992b"/>
+        <COMPID name="Product&lt;bool,Optional&lt;p&gt;&gt;" mc="Class" uid="ffdbff96-a7b4-46f1-af94-2641065bb81a"/>
+        <COMPID name="Optional&lt;p&gt;" mc="Class" uid="fc2bb7b8-6eba-48ea-be0b-58baf6936429"/>
+        <COMPID name="Optional&lt;IO::filedirective&gt;" mc="Class" uid="3d0767f7-e742-48ac-b5de-94f479fcba5e"/>
+        <COMPID name="Seq&lt;Any&gt;" mc="Class" uid="fbd20e68-201c-4170-b0df-f946b97d212d"/>
+      </COMP>
+    </DEPENDENCIES>
+  </OBJECT>
+</EXT>
