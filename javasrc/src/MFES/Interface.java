@@ -25,6 +25,7 @@ public class Interface {
 	private static final String DELEGATION_SEE_ALL_DELEGATIONS = "delegation5";
 	private static final String DELEGATION_VIEW_PRODUCTS = "delegation6";
 	private static final String DELEGATION_VIEW_BASKETS = "delegation7";
+	private static final String DELEGATION_ADD_PRODUCER = "delegation8";
 	private static final String EXIT = "exit";
 	private static String state;
 	
@@ -88,6 +89,8 @@ public class Interface {
 				delegationViewProducts();
 			}else if(state == DELEGATION_VIEW_BASKETS) {
 				delegationViewBaskets();
+			}else if(state == DELEGATION_ADD_PRODUCER) {
+				delegationAddProducer();
 			}
 			
 		}
@@ -315,7 +318,8 @@ public class Interface {
 			  + "5 - See All Delegations\n"
 			  + "6 - View Products\n"
 			  + "7 - View Baskets\n"
-			  + "8 - BACK\n"
+			  + "8 - Add Producer"
+			  + "9 - BACK\n"
 			  + "\nOption: ");
 	}
 	
@@ -340,11 +344,23 @@ public class Interface {
 		frutaFeia.getDelByName(frutaFeia.getDelegations(), name).makeBaskets();
 		state = DELEGATION;
 	}
+	
+	private static void delegationAddProducer() {
+		System.out.print("Delegation name: ");
+		Scanner in = new Scanner(System.in);
+		String name = in.nextLine();
+		System.out.print("Producer name: ");
+		String cName = in.nextLine();
+		frutaFeia.addDelToPro(cName, name);
+		state = DELEGATION;
+	}
+	
+	
 	private static void delegationAddConsumer() {
 		System.out.print("Delegation name: ");
 		Scanner in = new Scanner(System.in);
 		String name = in.nextLine();
-		System.out.print("Delegation name: ");
+		System.out.print("Consumer name: ");
 		String cName = in.nextLine();
 		frutaFeia.addCustomer(name, cName);
 		state = DELEGATION;
@@ -500,6 +516,9 @@ public class Interface {
 				state = DELEGATION_VIEW_BASKETS;
 				break;
 			case 8:
+				state = DELEGATION_ADD_PRODUCER;
+				break;
+			case 9:
 				state = MAIN;
 				break;
 			}
@@ -520,7 +539,7 @@ public class Interface {
 				return true;
 			}
 		}else if(state == DELEGATION) {
-			if(option>0 && option<9) {
+			if(option>0 && option<10) {
 				return true;
 			}
 		}
