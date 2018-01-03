@@ -12,7 +12,19 @@ public class Interface {
 	private static final String CONSUMER_FETCH = "consumer4";
 	private static final String CONSUMER_CANCEL = "consumer5";
 	private static final String PRODUCER = "producer";
+	private static final String PRODUCER_REGISTER = "producer1";
+	private static final String PRODUCER_SEE_ALL_PRODUCERS = "producer2";
+	private static final String PRODUCER_MAKE_PRODUCT = "producer3";
+	private static final String PRODUCER_SEND = "producer4";
+	private static final String PRODUCER_VIEW_PRODUCTS = "producer5";
 	private static final String DELEGATION = "delegation";
+	private static final String DELEGATION_REGISTER = "delegation1";
+	private static final String DELEGATION_MAKE_BASKET = "delegation2";
+	private static final String DELEGATION_ADD_CONSUMER = "delegation3";
+	private static final String DELEGATION_REMOVE_CONSUMER = "delegation4";
+	private static final String DELEGATION_SEE_ALL_DELEGATIONS = "delegation5";
+	private static final String DELEGATION_VIEW_PRODUCTS = "delegation6";
+	private static final String DELEGATION_VIEW_BASKETS = "delegation7";
 	private static final String EXIT = "exit";
 	private static String state;
 	
@@ -43,9 +55,39 @@ public class Interface {
 			}else if(state == PRODUCER) {
 				producerMenu();
 				readOption();
+			}else if(state == PRODUCER_REGISTER) {
+				producerRegister();
+			}
+			else if(state == PRODUCER_SEE_ALL_PRODUCERS) {
+				producerSeeAll();
+			}
+			else if(state == PRODUCER_MAKE_PRODUCT) {
+				producerMakeProduct();
+			}
+			else if(state == PRODUCER_SEND) {
+				producerSend();
+			}
+			else if(state == PRODUCER_VIEW_PRODUCTS) {
+				producerViewProducts();
 			}else if(state == DELEGATION) {
 				delegationMenu();
 				readOption();
+			}else if(state == DELEGATION) {
+				delegationMenu();
+			}else if(state == DELEGATION_REGISTER) {
+				delegationRegister();
+			}else if(state == DELEGATION_MAKE_BASKET) {
+				delegationMakeBasket();
+			}else if(state == DELEGATION_ADD_CONSUMER) {
+				delegationAddConsumer();
+			}else if(state == DELEGATION_REMOVE_CONSUMER) {
+				delegationRemoveConsumer();
+			}else if(state == DELEGATION_SEE_ALL_DELEGATIONS) {
+				delegationSeeAll();
+			}else if(state == DELEGATION_VIEW_PRODUCTS) {
+				delegationViewProducts();
+			}else if(state == DELEGATION_VIEW_BASKETS) {
+				delegationViewBaskets();
 			}
 			
 		}
@@ -230,12 +272,6 @@ public class Interface {
 		String pName = in.nextLine();
 		frutaFeia.addProductPro(name, pName);
 		frutaFeia.addProductStockPro(name, pName, 2L);
-		System.out.print("Write '0' to go back.\nOption: ");
-		int option = in.nextInt();
-		while(option != 0) {
-			System.out.print("Write '0' to go back.\nOption: ");
-			option = in.nextInt();
-		}
 		state = PRODUCER;
 	}
 	
@@ -244,24 +280,19 @@ public class Interface {
 		Scanner in = new Scanner(System.in);
 		String name = in.nextLine();
 		frutaFeia.sendToDels(name);
-		System.out.print("Write '0' to go back.\nOption: ");
-		int option = in.nextInt();
-		while(option != 0) {
-			System.out.print("Write '0' to go back.\nOption: ");
-			option = in.nextInt();
-		}
 		state = PRODUCER;
 	}
 	
 	private static void producerViewProducts() {
-		//TODO
-		Iterator it = frutaFeia.getProducers().iterator();
+		System.out.print("Producer name: ");
+		Scanner in = new Scanner(System.in);
+		String name = in.nextLine();
+		Iterator it = frutaFeia.getProByName(frutaFeia.getProducers(), name).stocks.products.keySet().iterator();
 		while(it.hasNext()) {
-			Producer obj = (Producer) it.next();
-			System.out.println("name = " + obj.name);
+			Object key = it.next();
+			System.out.println(key + " " + frutaFeia.getProByName(frutaFeia.getProducers(), name).stocks.products.get(key) );
 		}
 		System.out.print("Write '0' to go back.\nOption: ");
-		Scanner in = new Scanner(System.in);
 		int option = in.nextInt();
 		while(option != 0) {
 			System.out.print("Write '0' to go back.\nOption: ");
@@ -286,6 +317,99 @@ public class Interface {
 			  + "7 - View Baskets\n"
 			  + "8 - BACK\n"
 			  + "\nOption: ");
+	}
+	
+	private static void delegationRegister() {
+		System.out.println("To cancel write 'exit'.");
+		System.out.print("Name: ");
+		Scanner in = new Scanner(System.in);
+		String name = in.nextLine();
+		if(name == "exit") {
+			state = DELEGATION;
+			return;
+		}
+		frutaFeia.newProducer(name);
+		System.out.println("Delegation created");
+		state = DELEGATION;
+	}
+	
+	private static void delegationMakeBasket() {
+		System.out.print("Delegation name: ");
+		Scanner in = new Scanner(System.in);
+		String name = in.nextLine();
+		frutaFeia.getDelByName(frutaFeia.getDelegations(), name).makeBaskets();
+		state = DELEGATION;
+	}
+	private static void delegationAddConsumer() {
+		System.out.print("Delegation name: ");
+		Scanner in = new Scanner(System.in);
+		String name = in.nextLine();
+		System.out.print("Delegation name: ");
+		String cName = in.nextLine();
+		frutaFeia.addCustomer(name, cName);
+		state = DELEGATION;
+	}
+	
+	private static void delegationRemoveConsumer() {
+		System.out.print("Delegation name: ");
+		Scanner in = new Scanner(System.in);
+		String name = in.nextLine();
+		System.out.print("Delegation name: ");
+		String cName = in.nextLine();
+		frutaFeia.removeCustomer(name, cName);
+		state = DELEGATION;
+	}
+	
+	private static void delegationSeeAll() {
+		Iterator it = frutaFeia.getDelegations().iterator();
+		while(it.hasNext()) {
+			Delegation obj = (Delegation) it.next();
+			System.out.println("name = " + obj.name);
+		}
+		System.out.print("Write '0' to go back.\nOption: ");
+		Scanner in = new Scanner(System.in);
+		int option = in.nextInt();
+		while(option != 0) {
+			System.out.print("Write '0' to go back.\nOption: ");
+			option = in.nextInt();
+		}
+		state = PRODUCER;
+	}
+	
+	private static void delegationViewProducts() {
+		System.out.print("Delegation name: ");
+		Scanner in = new Scanner(System.in);
+		String name = in.nextLine();
+		Iterator it = frutaFeia.getDelByName(frutaFeia.getDelegations(), name).stocks.products.keySet().iterator();
+		while(it.hasNext()) {
+			Object key = it.next();
+			System.out.println(key + " " + frutaFeia.getDelByName(frutaFeia.getDelegations(), name).stocks.products.get(key) );
+		}
+		System.out.print("Write '0' to go back.\nOption: ");
+		int option = in.nextInt();
+		while(option != 0) {
+			System.out.print("Write '0' to go back.\nOption: ");
+			option = in.nextInt();
+		}
+		state = PRODUCER;
+	}
+	
+	private static void delegationViewBaskets() {
+		System.out.print("Delegation name: ");
+		Scanner in = new Scanner(System.in);
+		String name = in.nextLine();
+		Iterator it = frutaFeia.getDelByName(frutaFeia.getDelegations(), name).baskets.keySet().iterator();
+		while(it.hasNext()) {
+			Object key = it.next();
+			System.out.println(key + " " + frutaFeia.getDelByName(frutaFeia.getDelegations(), name).baskets.get(key) );
+		}
+		System.out.print("Write '0' to go back.\nOption: ");
+		int option = in.nextInt();
+		while(option != 0) {
+			System.out.print("Write '0' to go back.\nOption: ");
+			option = in.nextInt();
+		}
+		state = PRODUCER;
 	}
 	
 	private static void readOption() {
@@ -334,19 +458,19 @@ public class Interface {
 		}else if(state == PRODUCER) {
 			switch(option) {
 			case 1:
-				state = CONSUMER_REGISTER;
+				state = PRODUCER_REGISTER;
 				break;
 			case 2:
-				state = CONSUMER_SEE_ALL_CONSUMERS;
+				state = PRODUCER_SEE_ALL_PRODUCERS;
 				break;
 			case 3:
-				state = CONSUMER_SEE_LAST_BASKET;
+				state = PRODUCER_MAKE_PRODUCT;
 				break;
 			case 4:
-				state = CONSUMER_FETCH;
+				state = PRODUCER_SEND;
 				break;
 			case 5:
-				state = CONSUMER_CANCEL;
+				state = PRODUCER_VIEW_PRODUCTS;
 				break;
 			case 6:
 				state = MAIN;
@@ -355,21 +479,27 @@ public class Interface {
 		}else if(state == DELEGATION) {
 			switch(option) {
 			case 1:
-				state = CONSUMER_REGISTER;
+				state = DELEGATION_REGISTER;
 				break;
 			case 2:
-				state = CONSUMER_SEE_ALL_CONSUMERS;
+				state = DELEGATION_MAKE_BASKET;
 				break;
 			case 3:
-				state = CONSUMER_SEE_LAST_BASKET;
+				state = DELEGATION_ADD_CONSUMER;
 				break;
 			case 4:
-				state = CONSUMER_FETCH;
+				state = DELEGATION_REMOVE_CONSUMER;
 				break;
 			case 5:
-				state = CONSUMER_CANCEL;
+				state = DELEGATION_SEE_ALL_DELEGATIONS;
 				break;
 			case 6:
+				state = DELEGATION_VIEW_PRODUCTS;
+				break;
+			case 7:
+				state = DELEGATION_VIEW_BASKETS;
+				break;
+			case 8:
 				state = MAIN;
 				break;
 			}
@@ -383,6 +513,14 @@ public class Interface {
 			}
 		}else if(state == CONSUMER) {
 			if(option>0 && option<7) {
+				return true;
+			}
+		}else if(state == PRODUCER) {
+			if(option>0 && option<7) {
+				return true;
+			}
+		}else if(state == DELEGATION) {
+			if(option>0 && option<9) {
 				return true;
 			}
 		}
