@@ -1,0 +1,65 @@
+class Producer
+types
+	public Name = seq of char inv n == len n > 0;
+instance variables
+	public name : Name;
+	public stocks : Products;
+	public delegations : set of Delegation;
+operations
+	public Producer: seq of char ==> Producer
+	Producer(Name) == (name := Name;stocks := new Products();delegations := {} ; return self);
+	--Add a product
+	public addProduct: Products`Type ==> ()
+	addProduct(P) == (stocks.addProduct(P););
+	--Remove a product
+	public removeProduct: Products`Type ==> ()
+	removeProduct(P) == (stocks.removeProduct(P));
+	--Get product list
+	public getProducts: () ==> set of Products`Type
+	getProducts() == (return stocks.getProducts());
+	--Add stock to a product
+	public addProductStock: Products`Type * real ==> ()
+	addProductStock(P,S) == (stocks.addProductStock(P,S));
+	--Remove stock from a product
+	public removeProductStock: Products`Type * real ==> ()
+	removeProductStock(P,S) == (stocks.removeProductStock(P,S));
+	--Get stock of a product
+	public getStock: Products`Type ==> real
+	getStock(P) == (return stocks.getStock(P));
+	--Add a new delegation
+	public addDelegation: Delegation ==> ()
+	addDelegation(D) == (delegations := delegations union {D})
+	pre D not in set delegations
+	post D in set delegations;
+	--Remove a delegation
+	public removeDelegation: Delegation ==> ()
+	removeDelegation(D) == (delegations := delegations \ {D};)
+	pre D in set delegations
+	post D not in set delegations;
+	--Get list of delegations
+	public getDelegations: () ==> set of Delegation
+	getDelegations() == (return delegations);
+	--Send product to delegation
+	public sendToDelegation: Delegation * Products`Type * real ==> ()
+	sendToDelegation(D,P,Q) == (D.addProductStock(P,Q);removeProductStock(P,Q);)
+	pre Q <= stocks.products(P) and P in set (dom stocks.products inter dom D.stocks.products);
+	--For each delegation associated with the producer, send products that they need, being equally distributed among all delegations that seek a certain product
+	public sendProducts: () ==> ()
+	sendProducts() == (
+		dcl n : nat;--number of delegations that sell the current product
+		dcl s : nat;
+		for all product in set (dom stocks.products) do(
+			n := 0;
+			for all delegation in set delegations do (
+				if(product in set delegation.getProducts()) then n:= n+1;
+			);
+			if(getStock(product) > 0) then(
+				s := getStock(product);
+				for all delegation in set delegations do(
+					if(product in set delegation.getProducts()) then sendToDelegation(delegation,product,s / n);
+				);
+				removeProductStock(product,getStock(product));
+			);
+		);
+	)pre exists p in set dom stocks.products & stocks.products(p) > 0;
+end Producer

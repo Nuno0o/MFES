@@ -1,0 +1,59 @@
+<?xml version="1.0" ?>
+<!--GENERATED FILE, PLEASE DO NOT EDIT!!!--><EXT object="Set&lt;Consumer&gt;" version="3">
+  <DEPS>
+    <ID name="Set&lt;Consumer&gt;" mc="Class" uid="f3b8b015-f722-4962-9e92-23501f13ecbf"/>
+    <EXTID name="Consumer" mc="Class" uid="407ccff4-dad1-47f5-8629-423605394baa"/>
+    <EXTID name="Set&lt;T&gt;" mc="Class" uid="d0555a1b-b88b-4fe6-b540-473ba1a25ee2"/>
+  </DEPS>
+  <OBJECT>
+    <ID name="Set&lt;Consumer&gt;" mc="Class" uid="f3b8b015-f722-4962-9e92-23501f13ecbf"/>
+    <PID name="Binding classes" mc="Package" uid="2bb2fa31-f28b-498e-852e-5cd756bb3781"/>
+    <ATTRIBUTES>
+      <ATT name="IsActive">false</ATT>
+      <ATT name="IsMain">false</ATT>
+      <ATT name="IsElementary">false</ATT>
+      <ATT name="IsAbstract">false</ATT>
+      <ATT name="IsLeaf">false</ATT>
+      <ATT name="IsRoot">false</ATT>
+      <ATT name="Visibility">Public</ATT>
+      <ATT name="Name"><![CDATA[Set<Consumer>]]></ATT>
+      <ATT name="status">1970354901745664</ATT>
+    </ATTRIBUTES>
+    <DEPENDENCIES>
+      <COMP relation="TemplateInstanciation">
+        <OBJECT>
+          <ID name="" mc="TemplateBinding" uid="65e3d779-4f02-4d2f-9233-4fc90d279633"/>
+          <PID name="Set&lt;Consumer&gt;" mc="Class" uid="f3b8b015-f722-4962-9e92-23501f13ecbf"/>
+          <ATTRIBUTES>
+            <ATT name="Name"></ATT>
+            <ATT name="status">1970354901745664</ATT>
+          </ATTRIBUTES>
+          <DEPENDENCIES>
+            <COMP relation="ParameterSubstitution">
+              <OBJECT>
+                <ID name="" mc="TemplateParameterSubstitution" uid="0bc29aa3-11ea-46e5-be77-592f33afee9c"/>
+                <PID name="Set&lt;Consumer&gt;" mc="Class" uid="f3b8b015-f722-4962-9e92-23501f13ecbf"/>
+                <ATTRIBUTES>
+                  <ATT name="Value"></ATT>
+                  <ATT name="Name"></ATT>
+                  <ATT name="status">1970354901745664</ATT>
+                </ATTRIBUTES>
+                <DEPENDENCIES>
+                  <LINK relation="Actual">
+                    <ID name="Consumer" mc="Class" uid="407ccff4-dad1-47f5-8629-423605394baa"/>
+                  </LINK>
+                  <LINK relation="FormalParameter">
+                    <REFOBJ>
+                      <ID name="" mc="TemplateParameter" uid="8d30d3a9-1c83-4bca-a20d-ff48e3709828"/>
+                      <PID name="Set&lt;T&gt;" mc="Class" uid="d0555a1b-b88b-4fe6-b540-473ba1a25ee2"/>
+                    </REFOBJ>
+                  </LINK>
+                </DEPENDENCIES>
+              </OBJECT>
+            </COMP>
+          </DEPENDENCIES>
+        </OBJECT>
+      </COMP>
+    </DEPENDENCIES>
+  </OBJECT>
+</EXT>

@@ -1,0 +1,41 @@
+<?xml version="1.0" ?>
+<!--GENERATED FILE, PLEASE DO NOT EDIT!!!--><EXT object="Basic VDM Types" version="3">
+  <DEPS>
+    <ID name="Basic VDM Types" mc="Package" uid="76d2a51f-38d7-4c0c-ad24-6ee4210b977a"/>
+    <COMPID name="&lt;Grande&gt;" mc="DataType" uid="e379a39d-c8ff-46d3-9552-366d4c806833"/>
+    <COMPID name="&lt;Pequena&gt;" mc="DataType" uid="3c83163e-425f-41e0-ae4f-ff0f8ac435dc"/>
+    <COMPID name="&lt;append&gt;" mc="DataType" uid="e7b500ae-adc9-4ba0-80af-aee7cdf8aa71"/>
+    <COMPID name="&lt;start&gt;" mc="DataType" uid="5081bbab-2843-414e-8d40-449e1b7176d4"/>
+    <COMPID name="Any" mc="DataType" uid="04b00cdc-ce7b-46fc-a672-e3eb9f41622a"/>
+    <COMPID name="Void" mc="DataType" uid="6b65dd4c-c777-492a-acad-65e3853ddea5"/>
+    <COMPID name="bool" mc="DataType" uid="12c432d1-a927-4ca1-afd7-dad30d88b547"/>
+    <COMPID name="nat" mc="DataType" uid="4e4dcfaf-2de5-4435-b416-75ea8e062a19"/>
+    <COMPID name="real" mc="DataType" uid="2020b566-07a5-41ee-a4fe-845eb6727787"/>
+  </DEPS>
+  <OBJECT>
+    <ID name="Basic VDM Types" mc="Package" uid="76d2a51f-38d7-4c0c-ad24-6ee4210b977a"/>
+    <PID name="project1" mc="Package" uid="488bbb55-d27f-4af5-bda3-3caa7d43f16b"/>
+    <ATTRIBUTES>
+      <ATT name="IsInstantiable">false</ATT>
+      <ATT name="IsAbstract">false</ATT>
+      <ATT name="IsLeaf">false</ATT>
+      <ATT name="IsRoot">false</ATT>
+      <ATT name="Visibility">Public</ATT>
+      <ATT name="Name"><![CDATA[Basic VDM Types]]></ATT>
+      <ATT name="status">1970354901745664</ATT>
+    </ATTRIBUTES>
+    <DEPENDENCIES>
+      <COMP relation="OwnedElement">
+        <COMPID name="&lt;Grande&gt;" mc="DataType" uid="e379a39d-c8ff-46d3-9552-366d4c806833"/>
+        <COMPID name="&lt;Pequena&gt;" mc="DataType" uid="3c83163e-425f-41e0-ae4f-ff0f8ac435dc"/>
+        <COMPID name="real" mc="DataType" uid="2020b566-07a5-41ee-a4fe-845eb6727787"/>
+        <COMPID name="&lt;append&gt;" mc="DataType" uid="e7b500ae-adc9-4ba0-80af-aee7cdf8aa71"/>
+        <COMPID name="&lt;start&gt;" mc="DataType" uid="5081bbab-2843-414e-8d40-449e1b7176d4"/>
+        <COMPID name="Void" mc="DataType" uid="6b65dd4c-c777-492a-acad-65e3853ddea5"/>
+        <COMPID name="nat" mc="DataType" uid="4e4dcfaf-2de5-4435-b416-75ea8e062a19"/>
+        <COMPID name="bool" mc="DataType" uid="12c432d1-a927-4ca1-afd7-dad30d88b547"/>
+        <COMPID name="Any" mc="DataType" uid="04b00cdc-ce7b-46fc-a672-e3eb9f41622a"/>
+      </COMP>
+    </DEPENDENCIES>
+  </OBJECT>
+</EXT>

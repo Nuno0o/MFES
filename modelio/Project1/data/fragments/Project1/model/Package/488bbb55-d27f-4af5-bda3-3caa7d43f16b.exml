@@ -1,0 +1,49 @@
+<?xml version="1.0" ?>
+<!--GENERATED FILE, PLEASE DO NOT EDIT!!!--><EXT object="project1" version="3">
+  <DEPS>
+    <ID name="project1" mc="Package" uid="488bbb55-d27f-4af5-bda3-3caa7d43f16b"/>
+    <COMPID name="Basic VDM Types" mc="Package" uid="76d2a51f-38d7-4c0c-ad24-6ee4210b977a"/>
+    <COMPID name="Basket" mc="Class" uid="c4a26f49-4656-479b-83e0-6f7253538816"/>
+    <COMPID name="Binding classes" mc="Package" uid="2bb2fa31-f28b-498e-852e-5cd756bb3781"/>
+    <COMPID name="Composite VDM Types" mc="Package" uid="ef1ee734-7495-4e31-951f-c21b846e7ada"/>
+    <COMPID name="Consumer" mc="Class" uid="407ccff4-dad1-47f5-8629-423605394baa"/>
+    <COMPID name="Delegation" mc="Class" uid="1c5c039b-ae8b-46c7-8f5f-16a2a6f1b6af"/>
+    <COMPID name="FrutaFeia" mc="Class" uid="d90f2be4-cd63-4686-a2b1-f8cf05d2ee97"/>
+    <COMPID name="Producer" mc="Class" uid="1765b09a-321d-41f0-addb-bbff1c9a4fa6"/>
+    <COMPID name="Products" mc="Class" uid="91bcab0b-190a-4947-a46c-0084550e4684"/>
+    <COMPID name="Tests" mc="Class" uid="cfc2c59e-db4c-4a4b-8566-e6285f487c76"/>
+    <COMPID name="overview diagram" mc="ClassDiagram" uid="5dd88cc0-9b65-4ae9-adc4-569cf8bb3ad1"/>
+    <COMPID name="project1 (structure_autodiagram)" mc="ClassDiagram" uid="c10ee2f6-682b-423a-ad51-a256f1b87076"/>
+  </DEPS>
+  <OBJECT>
+    <ID name="project1" mc="Package" uid="488bbb55-d27f-4af5-bda3-3caa7d43f16b"/>
+    <PID name="Project1" mc="Project" uid="952168dd-ef48-48ac-8ec3-13a22f82d23d"/>
+    <ATTRIBUTES>
+      <ATT name="IsInstantiable">false</ATT>
+      <ATT name="IsAbstract">false</ATT>
+      <ATT name="IsLeaf">false</ATT>
+      <ATT name="IsRoot">false</ATT>
+      <ATT name="Visibility">Public</ATT>
+      <ATT name="Name"><![CDATA[project1]]></ATT>
+      <ATT name="status">1970354901745664</ATT>
+    </ATTRIBUTES>
+    <DEPENDENCIES>
+      <COMP relation="OwnedElement">
+        <COMPID name="Basic VDM Types" mc="Package" uid="76d2a51f-38d7-4c0c-ad24-6ee4210b977a"/>
+        <COMPID name="Basket" mc="Class" uid="c4a26f49-4656-479b-83e0-6f7253538816"/>
+        <COMPID name="Consumer" mc="Class" uid="407ccff4-dad1-47f5-8629-423605394baa"/>
+        <COMPID name="Delegation" mc="Class" uid="1c5c039b-ae8b-46c7-8f5f-16a2a6f1b6af"/>
+        <COMPID name="FrutaFeia" mc="Class" uid="d90f2be4-cd63-4686-a2b1-f8cf05d2ee97"/>
+        <COMPID name="Producer" mc="Class" uid="1765b09a-321d-41f0-addb-bbff1c9a4fa6"/>
+        <COMPID name="Products" mc="Class" uid="91bcab0b-190a-4947-a46c-0084550e4684"/>
+        <COMPID name="Tests" mc="Class" uid="cfc2c59e-db4c-4a4b-8566-e6285f487c76"/>
+        <COMPID name="Composite VDM Types" mc="Package" uid="ef1ee734-7495-4e31-951f-c21b846e7ada"/>
+        <COMPID name="Binding classes" mc="Package" uid="2bb2fa31-f28b-498e-852e-5cd756bb3781"/>
+      </COMP>
+      <COMP relation="Product">
+        <COMPID name="overview diagram" mc="ClassDiagram" uid="5dd88cc0-9b65-4ae9-adc4-569cf8bb3ad1"/>
+        <COMPID name="project1 (structure_autodiagram)" mc="ClassDiagram" uid="c10ee2f6-682b-423a-ad51-a256f1b87076"/>
+      </COMP>
+    </DEPENDENCIES>
+  </OBJECT>
+</EXT>

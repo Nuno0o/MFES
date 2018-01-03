@@ -1,0 +1,55 @@
+<?xml version="1.0" ?>
+<!--GENERATED FILE, PLEASE DO NOT EDIT!!!--><EXT object="Optional&lt;p&gt;" version="3">
+  <DEPS>
+    <ID name="Optional&lt;p&gt;" mc="Class" uid="fc2bb7b8-6eba-48ea-be0b-58baf6936429"/>
+    <EXTID name="Optional&lt;T&gt;" mc="Class" uid="cfa2e047-dfa6-4810-9a16-1d7f87cfbd2f"/>
+  </DEPS>
+  <OBJECT>
+    <ID name="Optional&lt;p&gt;" mc="Class" uid="fc2bb7b8-6eba-48ea-be0b-58baf6936429"/>
+    <PID name="Binding classes" mc="Package" uid="2bb2fa31-f28b-498e-852e-5cd756bb3781"/>
+    <ATTRIBUTES>
+      <ATT name="IsActive">false</ATT>
+      <ATT name="IsMain">false</ATT>
+      <ATT name="IsElementary">false</ATT>
+      <ATT name="IsAbstract">false</ATT>
+      <ATT name="IsLeaf">false</ATT>
+      <ATT name="IsRoot">false</ATT>
+      <ATT name="Visibility">Public</ATT>
+      <ATT name="Name"><![CDATA[Optional<p>]]></ATT>
+      <ATT name="status">1970354901745664</ATT>
+    </ATTRIBUTES>
+    <DEPENDENCIES>
+      <COMP relation="TemplateInstanciation">
+        <OBJECT>
+          <ID name="" mc="TemplateBinding" uid="3060e701-a119-4171-aeaf-2b83196fa82b"/>
+          <PID name="Optional&lt;p&gt;" mc="Class" uid="fc2bb7b8-6eba-48ea-be0b-58baf6936429"/>
+          <ATTRIBUTES>
+            <ATT name="Name"></ATT>
+            <ATT name="status">1970354901745664</ATT>
+          </ATTRIBUTES>
+          <DEPENDENCIES>
+            <COMP relation="ParameterSubstitution">
+              <OBJECT>
+                <ID name="" mc="TemplateParameterSubstitution" uid="a289e604-b5e9-4e00-9839-264b2c0e7b8f"/>
+                <PID name="Optional&lt;p&gt;" mc="Class" uid="fc2bb7b8-6eba-48ea-be0b-58baf6936429"/>
+                <ATTRIBUTES>
+                  <ATT name="Value"></ATT>
+                  <ATT name="Name"></ATT>
+                  <ATT name="status">1970354901745664</ATT>
+                </ATTRIBUTES>
+                <DEPENDENCIES>
+                  <LINK relation="FormalParameter">
+                    <REFOBJ>
+                      <ID name="" mc="TemplateParameter" uid="99cfbc86-4512-41f5-b07d-3a650e499832"/>
+                      <PID name="Optional&lt;T&gt;" mc="Class" uid="cfa2e047-dfa6-4810-9a16-1d7f87cfbd2f"/>
+                    </REFOBJ>
+                  </LINK>
+                </DEPENDENCIES>
+              </OBJECT>
+            </COMP>
+          </DEPENDENCIES>
+        </OBJECT>
+      </COMP>
+    </DEPENDENCIES>
+  </OBJECT>
+</EXT>
