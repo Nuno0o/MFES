@@ -8,6 +8,8 @@ instance variables
 	public baskets : map Consumer to Basket;
 	--Baskets can only be sent to customers
 	inv dom baskets subset customers;
+	--Number of baskets is equal or less than number of customers
+	inv card dom baskets <= card customers;
 	--A basket can't be in the hands of the customer and in the delegation at the same time
 	inv forall c in set customers & elems c.baskets inter rng baskets = {};
 operations
