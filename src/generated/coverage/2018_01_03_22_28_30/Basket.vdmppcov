@@ -13,7 +13,8 @@ operations
 	Basket(M) == (maxWeight := M ; stocks := new Products();return self);
 	--Add a product
 	public addProduct: Products`Type ==> ()
-	addProduct(P) == (stocks.addProduct(P););
+	addProduct(P) == (stocks.addProduct(P);)
+	pre card(dom stocks.products) + 1 <= maxNProducts(maxWeight);
 	--Get product list
 	public getProducts: () ==> set of Products`Type
 	getProducts() == (return stocks.getProducts());
