@@ -26,6 +26,7 @@ public class Interface {
 	private static final String DELEGATION_VIEW_PRODUCTS = "delegation6";
 	private static final String DELEGATION_VIEW_BASKETS = "delegation7";
 	private static final String DELEGATION_ADD_PRODUCER = "delegation8";
+	private static final String DELEGATION_ADD_PRODUCT = "delegation9";
 	private static final String EXIT = "exit";
 	private static String state;
 	
@@ -91,6 +92,8 @@ public class Interface {
 				delegationViewBaskets();
 			}else if(state == DELEGATION_ADD_PRODUCER) {
 				delegationAddProducer();
+			}else if(state == DELEGATION_ADD_PRODUCT) {
+				delegationAddProduct();
 			}
 			
 		}
@@ -273,8 +276,10 @@ public class Interface {
 		String name = in.nextLine();
 		System.out.print("Product name: ");
 		String pName = in.nextLine();
+		System.out.print("Quantity: ");
+		int quantity = in.nextInt();
 		frutaFeia.addProductPro(name, pName);
-		frutaFeia.addProductStockPro(name, pName, 2L);
+		frutaFeia.addProductStockPro(name, pName, quantity);
 		state = PRODUCER;
 	}
 	
@@ -312,14 +317,15 @@ public class Interface {
 			  + "*                             *\n"
 			  + "*******************************\n"
 			  + "1 - Register\n"
-			  + "2 - Make Basket\n"
+			  + "2 - Make Baskets\n"
 			  + "3 - Add Consumer\n"
 			  + "4 - Remove Consumer\n"
 			  + "5 - See All Delegations\n"
 			  + "6 - View Products\n"
 			  + "7 - View Baskets\n"
-			  + "8 - Add Producer"
-			  + "9 - BACK\n"
+			  + "8 - Add Producer\n"
+			  + "9 - Add Product\n"
+			  + "0 - BACK\n"
 			  + "\nOption: ");
 	}
 	
@@ -332,7 +338,7 @@ public class Interface {
 			state = DELEGATION;
 			return;
 		}
-		frutaFeia.newProducer(name);
+		frutaFeia.newDelegation(name);
 		System.out.println("Delegation created");
 		state = DELEGATION;
 	}
@@ -354,7 +360,6 @@ public class Interface {
 		frutaFeia.addDelToPro(cName, name);
 		state = DELEGATION;
 	}
-	
 	
 	private static void delegationAddConsumer() {
 		System.out.print("Delegation name: ");
@@ -389,7 +394,7 @@ public class Interface {
 			System.out.print("Write '0' to go back.\nOption: ");
 			option = in.nextInt();
 		}
-		state = PRODUCER;
+		state = DELEGATION;
 	}
 	
 	private static void delegationViewProducts() {
@@ -407,7 +412,7 @@ public class Interface {
 			System.out.print("Write '0' to go back.\nOption: ");
 			option = in.nextInt();
 		}
-		state = PRODUCER;
+		state = DELEGATION;
 	}
 	
 	private static void delegationViewBaskets() {
@@ -425,7 +430,17 @@ public class Interface {
 			System.out.print("Write '0' to go back.\nOption: ");
 			option = in.nextInt();
 		}
-		state = PRODUCER;
+		state = DELEGATION;
+	}
+	
+	private static void delegationAddProduct() {
+		System.out.print("Delegation name: ");
+		Scanner in = new Scanner(System.in);
+		String name = in.nextLine();
+		System.out.print("Product name: ");
+		String pName = in.nextLine();
+		frutaFeia.addProductDel(name, pName);
+		state = DELEGATION;
 	}
 	
 	private static void readOption() {
@@ -519,6 +534,9 @@ public class Interface {
 				state = DELEGATION_ADD_PRODUCER;
 				break;
 			case 9:
+				state = DELEGATION_ADD_PRODUCT;
+				break;
+			case 0:
 				state = MAIN;
 				break;
 			}
@@ -539,7 +557,7 @@ public class Interface {
 				return true;
 			}
 		}else if(state == DELEGATION) {
-			if(option>0 && option<10) {
+			if(option>=0 && option<10) {
 				return true;
 			}
 		}
