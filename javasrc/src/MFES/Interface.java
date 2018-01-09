@@ -38,6 +38,8 @@ public class Interface {
 		frutaFeia = new FrutaFeia();
 		state = MAIN;
 		while(state!=EXIT) {
+			
+			
 			if(state == MAIN) {
 				mainMenu();
 				readOption();
@@ -348,6 +350,7 @@ public class Interface {
 		Scanner in = new Scanner(System.in);
 		String name = in.nextLine();
 		frutaFeia.getDelByName(frutaFeia.getDelegations(), name).makeBaskets();
+		frutaFeia.getDelByName(frutaFeia.getDelegations(), name).fillBaskets();
 		state = DELEGATION;
 	}
 	
