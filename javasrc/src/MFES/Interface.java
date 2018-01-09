@@ -298,7 +298,7 @@ public class Interface {
 		Iterator it = frutaFeia.getProByName(frutaFeia.getProducers(), name).stocks.products.keySet().iterator();
 		while(it.hasNext()) {
 			Object key = it.next();
-			System.out.println(key + " " + frutaFeia.getProByName(frutaFeia.getProducers(), name).stocks.products.get(key) );
+			System.out.println(key + " - " + frutaFeia.getProByName(frutaFeia.getProducers(), name).stocks.products.get(key) );
 		}
 		System.out.print("Write '0' to go back.\nOption: ");
 		int option = in.nextInt();
@@ -422,7 +422,12 @@ public class Interface {
 		Iterator it = frutaFeia.getDelByName(frutaFeia.getDelegations(), name).baskets.keySet().iterator();
 		while(it.hasNext()) {
 			Object key = it.next();
-			System.out.println(key + " " + frutaFeia.getDelByName(frutaFeia.getDelegations(), name).baskets.get(key) );
+			System.out.println(((Consumer)key).name + "'s basket:\n");
+			Iterator it2 = ((Basket)frutaFeia.getDelByName(frutaFeia.getDelegations(), name).baskets.get(key)).stocks.products.keySet().iterator();
+			while(it.hasNext()) {
+				Object key2 = it2.next();
+				System.out.println(key2 + " - " + ((Basket)frutaFeia.getDelByName(frutaFeia.getDelegations(), name).baskets.get(key)).stocks.products.get(key2) );
+			}
 		}
 		System.out.print("Write '0' to go back.\nOption: ");
 		int option = in.nextInt();
