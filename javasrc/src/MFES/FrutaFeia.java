@@ -66,7 +66,7 @@ public class FrutaFeia {
 
   public void addCustomer(final String DN, final String CN) {
 
-    FrutaFeia.getDelByName(Utils.copy(delegations), +DN)
+    FrutaFeia.getDelByName(Utils.copy(delegations), DN)
         .addCustomer(getConByName(Utils.copy(consumers), CN));
   }
 
